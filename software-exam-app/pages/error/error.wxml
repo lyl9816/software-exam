@@ -1,7 +1,7 @@
 <!--pages/error/error.wxml-->
 <i-grid>
     <i-grid-item>
-        <i-grid-icon class="circle">
+        <i-grid-icon class="circle" bindtap="goErrorproblems">
            <text class="font" color="#d42517">88</text>
         </i-grid-icon>
         <i-grid-label>题 数</i-grid-label>

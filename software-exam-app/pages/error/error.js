@@ -62,5 +62,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  goErrorproblems() {
+    wx.navigateTo({
+      url: '/pages/errorproblems/errorproblems',
+    })
+
   }
 })

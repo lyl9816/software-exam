@@ -10,7 +10,10 @@
     "pages/collection/collection",
     "pages/error/error",
     "pages/test/test",
-    "pages/online/online"
+    "pages/online/online",
+    "pages/realpoblems/realproblems",
+    "pages/errorproblems/errorproblems",
+    "pages/collectionproblems/collectionproblems"
   ],
   "window": {
     "backgroundTextStyle": "light",

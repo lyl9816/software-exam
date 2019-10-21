@@ -12,7 +12,7 @@ module.exports = {
   GetMsgList: WxApiRoot + 'sysmsg/getAllMsg', //获取消息列
   GetMsgDetail: WxApiRoot + 'sysmsg/getDetail/', //获取消息详细
 
-  AuthLoginByWeixin: WxApiRoot + 'auth/login_by_weixin', //微信登录
+  AuthLoginByWeixin: WxApiRoot + 'login_by_weixin', //微信登录
   
   StorageUpload: WxApiRoot + 'storage/upload', //存储上传,
   FetchStorage: WxApiRoot + 'storage/fetch/', //存储获取,

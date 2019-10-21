@@ -41,13 +41,13 @@
     
 </view>
 
-
+</view>
 
 
 <!-- 底部 -->
 <view class="top">
-<!-- 交卷 -->
-<image style="width:30px;height:30px;" src="/static/images/submit.png"></image>
+<!-- 返回首页 -->
+<image style="width:30px;height:30px;" src="/static/images/home.png"></image>
 <!-- 收藏 -->
    <image class="left" style="width:30px;height:30px" catchtap='handleCollection'  wx:if="{{!isCollected}}" src="/static/images/star.png"></image>
 <image  class="left" catchtap='handleCollection' wx:if="{{isCollected}}" src="/static/images/star_selected.png" style="width:30px;height:30px" ></image>
@@ -84,4 +84,3 @@
 
 </view>
 
-</view>

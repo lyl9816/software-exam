@@ -62,5 +62,10 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  goCollectionproblems(){
+    wx.navigateTo({
+      url: '/pages/collectionproblems/collectionproblems',
+    })
   }
 })
