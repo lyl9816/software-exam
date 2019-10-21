@@ -1,4 +1,5 @@
 // pages/problems/problems.js
+
 Page({
 
   /**
@@ -34,8 +35,12 @@ Page({
     showRight1: false,
 
     total: 75,
+    touchS: [0, 0],
+    touchE: [0, 0]
    
   },
+  
+
   add:function(e){
     var $id = e.currentTarget.dataset.id;
     console.log($id)
@@ -70,16 +75,49 @@ Page({
       title: isCollected ? '收藏成功' : '取消收藏',
       icon: 'success'
     })
+  }, 
+  // 页面滑动
+//   wx.switchTab({
+//   url: 'pages/collection/collection'
+// })
+  touchStart: function (e) {
+    // console.log(e.touches[0].pageX)
+    let sx = e.touches[0].pageX
+    let sy = e.touches[0].pageY
+    this.data.touchS = [sx, sy]
   },
-
-
-  
+  touchMove: function (e) {
+    let sx = e.touches[0].pageX;
+    let sy = e.touches[0].pageY;
+    this.data.touchE = [sx, sy]
+  },
+  touchEnd: function (e) {
+    let start = this.data.touchS
+    let end = this.data.touchE
+    console.log(start)
+    console.log(end)
+    if (start[0] < end[0] - 30) {
+      console.log('右滑')
+      wx.navigateTo({
+        url: '/pages/problems/problems',
+      })
+    } else if (start[0] > end[0] + 30) {
+      console.log('左滑')
+      wx.navigateTo({
+        url: '/pages/problems/problems',
+      })
+      
+    } else {
+      console.log('静止')
+    }
+  },
+ 
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this
   },
 
   /**

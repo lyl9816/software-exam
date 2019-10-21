@@ -41,7 +41,7 @@
 
 
 
-<!--  -->
+<!-- 底部 -->
 <view class="top">
 <!-- 交卷 -->
 <image style="width:30px;height:30px;" src="/static/images/submit.png"></image>
@@ -66,18 +66,11 @@
     <view class="demo-container">
     <!-- 抽屉表格 -->
    <scroll-view scroll-y="true" style="height: 300px">
-   <!-- <view class="table">
-      <view class="tr" wx:for="{{15}}"  wx:for-item="log">
-         <view class="td td1" wx:for="{{5}}" wx:key="index">
-       {{(index + 1)*log}}
-           </view>
-
-      </view>
-    </view> -->
+   
     <view  class="testbox">
     <view  class="box_item fl" wx:for="{{total}}" wx:key="index">
-    <!-- style="background:url('/static/images/back.png');background-size:cover;width: 60rpx;height: 60rpx" -->
-      <view class="back">{{index+1}}</view>
+
+    <view class="back">{{index+1}}</view>
        
     </view>
    </view>

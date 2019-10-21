@@ -1,4 +1,8 @@
 <!--pages/problems/problems.wxml-->
+
+<!-- 页面左右滑动 -->
+<view class='btn'  bindtouchstart='touchStart' bindtouchmove='touchMove' bindtouchend='touchEnd'>
+
 <view>
 <i-tabs current="{{ current }}" bindchange="handleChange">
     <i-tab key="tab1" title="答题模式" color="#00BBFF"></i-tab>
@@ -36,8 +40,14 @@
     </i-collapse>
     
 </view>
-<!-- footer -->
+
+
+
+
+<!-- 底部 -->
 <view class="top">
+<!-- 交卷 -->
+<image style="width:30px;height:30px;" src="/static/images/submit.png"></image>
 <!-- 收藏 -->
    <image class="left" style="width:30px;height:30px" catchtap='handleCollection'  wx:if="{{!isCollected}}" src="/static/images/star.png"></image>
 <image  class="left" catchtap='handleCollection' wx:if="{{isCollected}}" src="/static/images/star_selected.png" style="width:30px;height:30px" ></image>
@@ -51,7 +61,7 @@
         </view>
     </i-badge>
     <!-- <i-button class="btn" bind:click="handleClick" type="success" shape="circle" size="small">小尺寸</i-button> -->
-  <image class="left" style="width:30px;height:30px" catchtap='toggleRight1'  wx:if="{{!isCollected}}" src="/static/images/home.png"></image>
+  <image class="left" style="width:25px;height:25px" catchtap='toggleRight1'  wx:if="{{!isCollected}}" src="/static/images/num_all.png"></image>
    
 
 
@@ -59,17 +69,11 @@
     <view class="demo-container">
     <!-- 抽屉表格 -->
    <scroll-view scroll-y="true" style="height: 300px">
-   <!-- <view class="table">
-      <view class="tr" wx:for="{{15}}"  wx:for-item="log">
-         <view class="td td1" wx:for="{{5}}" wx:key="index">
-       {{(index + 1)*log}}
-           </view>
-
-      </view>
-    </view> -->
+   
     <view  class="testbox">
-    <view  class="box_item fl" wx:for="{{total}}">
-      <view class="">{{index+1}}</view>
+    <view  class="box_item fl" wx:for="{{total}}" wx:key="index">
+
+    <view class="back">{{index+1}}</view>
        
     </view>
    </view>
@@ -80,3 +84,4 @@
 
 </view>
 
+</view>

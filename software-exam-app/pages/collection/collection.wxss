@@ -13,7 +13,7 @@
    text-align: center;
 }
 .font{
-  font-size:38px;
+  font-size:50px;
   color: #2f90b9;
   position: absolute;
   top: 50%;

@@ -36,3 +36,15 @@
 .fl {
   float: left
 }
+.back{
+  width: 60rpx;
+  height: 60rpx;
+  background-color: #b2bbbe;
+  border-radius:25px;
+}
+.right{
+  background-color: #61ac85;
+}
+.wrong{
+  background-color: #ee3f4d;
+}
