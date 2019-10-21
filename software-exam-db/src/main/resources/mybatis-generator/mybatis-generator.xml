@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="DB2Tables"    targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库链接地址账号密码-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://47.96.137.14:3306/qbank-dev?characterEncoding=UTF-8"
+                        userId="qbank-dev"
+                        password="JT6c4GSnRHJR6Di2" >
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--生成Model类存放位置-->
+        <javaModelGenerator targetPackage="db.domain" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--生成映射文件存放位置-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--生成Dao类存放位置-->
+        <!-- 客户端代码，生成易于使用的针对Model对象和XML配置文件 的代码
+                type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象
+                type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
+                type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
+        -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="db.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        
+<!--        &lt;!&ndash; table指定每个表的生成策略 &ndash;&gt;-->
+        <table tableName="analyze" domainObjectName="Analyze"></table>
+        <table tableName="board" domainObjectName="Board"></table>
+        <table tableName="choices" domainObjectName="Choices"></table>
+        <table tableName="collection" domainObjectName="Collection"></table>
+        <table tableName="content" domainObjectName="Content"></table>
+        <table tableName="paper" domainObjectName="Paper"></table>
+        <table tableName="questions" domainObjectName="Questions"></table>
+        <table tableName="real_questions" domainObjectName="RealQuestions"></table>
+        <table tableName="second_title" domainObjectName="SecondTitle"></table>
+        <table tableName="sort_course" domainObjectName="SortCourse"></table>
+        <table tableName="sort_level" domainObjectName="SortLevel"></table>
+        <table tableName="user" domainObjectName="User"></table>
+        <table tableName="wrong_questions" domainObjectName="WrongQuestions"></table>
+
+    </context>
+
+</generatorConfiguration>
