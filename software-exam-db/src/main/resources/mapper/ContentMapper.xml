@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="db.mapper.ContentMapper">
-  <resultMap id="BaseResultMap" type="db.domain.Content">
+<mapper namespace="software.exam.db.mapper.ContentMapper">
+  <resultMap id="BaseResultMap" type="software.exam.db.domain.Content">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="tid" jdbcType="INTEGER" property="tid" />
     <result column="content" jdbcType="VARCHAR" property="content" />
@@ -67,7 +67,7 @@
   <sql id="Base_Column_List">
     id, tid, content
   </sql>
-  <select id="selectByExample" parameterType="db.domain.ContentExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="software.exam.db.domain.ContentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -91,19 +91,19 @@
     delete from content
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="db.domain.ContentExample">
+  <delete id="deleteByExample" parameterType="software.exam.db.domain.ContentExample">
     delete from content
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="db.domain.Content">
+  <insert id="insert" parameterType="software.exam.db.domain.Content">
     insert into content (id, tid, content
       )
     values (#{id,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="db.domain.Content">
+  <insert id="insertSelective" parameterType="software.exam.db.domain.Content">
     insert into content
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -128,7 +128,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="db.domain.ContentExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="software.exam.db.domain.ContentExample" resultType="java.lang.Long">
     select count(*) from content
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -160,7 +160,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="db.domain.Content">
+  <update id="updateByPrimaryKeySelective" parameterType="software.exam.db.domain.Content">
     update content
     <set>
       <if test="tid != null">
@@ -172,7 +172,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="db.domain.Content">
+  <update id="updateByPrimaryKey" parameterType="software.exam.db.domain.Content">
     update content
     set tid = #{tid,jdbcType=INTEGER},
       content = #{content,jdbcType=VARCHAR}

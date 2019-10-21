@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="db.mapper.PaperMapper">
-  <resultMap id="BaseResultMap" type="db.domain.Paper">
+<mapper namespace="software.exam.db.mapper.PaperMapper">
+  <resultMap id="BaseResultMap" type="software.exam.db.domain.Paper">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="time" jdbcType="VARCHAR" property="time" />
@@ -67,7 +67,7 @@
   <sql id="Base_Column_List">
     id, name, time
   </sql>
-  <select id="selectByExample" parameterType="db.domain.PaperExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="software.exam.db.domain.PaperExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -91,19 +91,19 @@
     delete from paper
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="db.domain.PaperExample">
+  <delete id="deleteByExample" parameterType="software.exam.db.domain.PaperExample">
     delete from paper
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="db.domain.Paper">
+  <insert id="insert" parameterType="software.exam.db.domain.Paper">
     insert into paper (id, name, time
       )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="db.domain.Paper">
+  <insert id="insertSelective" parameterType="software.exam.db.domain.Paper">
     insert into paper
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -128,7 +128,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="db.domain.PaperExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="software.exam.db.domain.PaperExample" resultType="java.lang.Long">
     select count(*) from paper
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -160,7 +160,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="db.domain.Paper">
+  <update id="updateByPrimaryKeySelective" parameterType="software.exam.db.domain.Paper">
     update paper
     <set>
       <if test="name != null">
@@ -172,7 +172,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="db.domain.Paper">
+  <update id="updateByPrimaryKey" parameterType="software.exam.db.domain.Paper">
     update paper
     set name = #{name,jdbcType=VARCHAR},
       time = #{time,jdbcType=VARCHAR}

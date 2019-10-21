@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="db.mapper.CollectionMapper">
-  <resultMap id="BaseResultMap" type="db.domain.Collection">
+<mapper namespace="software.exam.db.mapper.CollectionMapper">
+  <resultMap id="BaseResultMap" type="software.exam.db.domain.Collection">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="uid" jdbcType="INTEGER" property="uid" />
     <result column="qid" jdbcType="INTEGER" property="qid" />
@@ -67,7 +67,7 @@
   <sql id="Base_Column_List">
     id, uid, qid
   </sql>
-  <select id="selectByExample" parameterType="db.domain.CollectionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="software.exam.db.domain.CollectionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -91,17 +91,17 @@
     delete from collection
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="db.domain.CollectionExample">
+  <delete id="deleteByExample" parameterType="software.exam.db.domain.CollectionExample">
     delete from collection
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="db.domain.Collection">
+  <insert id="insert" parameterType="software.exam.db.domain.Collection">
     insert into collection (id, uid, qid)
     values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{qid,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="db.domain.Collection">
+  <insert id="insertSelective" parameterType="software.exam.db.domain.Collection">
     insert into collection
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -126,7 +126,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="db.domain.CollectionExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="software.exam.db.domain.CollectionExample" resultType="java.lang.Long">
     select count(*) from collection
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -158,7 +158,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="db.domain.Collection">
+  <update id="updateByPrimaryKeySelective" parameterType="software.exam.db.domain.Collection">
     update collection
     <set>
       <if test="uid != null">
@@ -170,7 +170,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="db.domain.Collection">
+  <update id="updateByPrimaryKey" parameterType="software.exam.db.domain.Collection">
     update collection
     set uid = #{uid,jdbcType=INTEGER},
       qid = #{qid,jdbcType=INTEGER}

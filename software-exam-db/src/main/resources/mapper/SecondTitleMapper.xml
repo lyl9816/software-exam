@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="db.mapper.SecondTitleMapper">
-  <resultMap id="BaseResultMap" type="db.domain.SecondTitle">
+<mapper namespace="software.exam.db.mapper.SecondTitleMapper">
+  <resultMap id="BaseResultMap" type="software.exam.db.domain.SecondTitle">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="cid" jdbcType="INTEGER" property="cid" />
     <result column="second_title" jdbcType="VARCHAR" property="secondTitle" />
@@ -67,7 +67,7 @@
   <sql id="Base_Column_List">
     id, cid, second_title
   </sql>
-  <select id="selectByExample" parameterType="db.domain.SecondTitleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="software.exam.db.domain.SecondTitleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -91,19 +91,19 @@
     delete from second_title
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="db.domain.SecondTitleExample">
+  <delete id="deleteByExample" parameterType="software.exam.db.domain.SecondTitleExample">
     delete from second_title
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="db.domain.SecondTitle">
+  <insert id="insert" parameterType="software.exam.db.domain.SecondTitle">
     insert into second_title (id, cid, second_title
       )
     values (#{id,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{secondTitle,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="db.domain.SecondTitle">
+  <insert id="insertSelective" parameterType="software.exam.db.domain.SecondTitle">
     insert into second_title
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -128,7 +128,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="db.domain.SecondTitleExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="software.exam.db.domain.SecondTitleExample" resultType="java.lang.Long">
     select count(*) from second_title
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -160,7 +160,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="db.domain.SecondTitle">
+  <update id="updateByPrimaryKeySelective" parameterType="software.exam.db.domain.SecondTitle">
     update second_title
     <set>
       <if test="cid != null">
@@ -172,7 +172,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="db.domain.SecondTitle">
+  <update id="updateByPrimaryKey" parameterType="software.exam.db.domain.SecondTitle">
     update second_title
     set cid = #{cid,jdbcType=INTEGER},
       second_title = #{secondTitle,jdbcType=VARCHAR}
