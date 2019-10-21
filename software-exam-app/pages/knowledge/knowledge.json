@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+      "i-panel": "../../dist/panel/index",
+      "i-collapse": "../../dist/collapse/index",
+      "i-collapse-item": "../../dist/collapse-item/index"
+  },
+  "navigationBarTitleText": "知识点"
+}

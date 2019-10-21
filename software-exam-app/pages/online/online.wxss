@@ -1,0 +1,50 @@
+/* pages/problems/problems.wxss */
+.top{
+  position: fixed;
+  bottom: 0;
+  float:initial
+
+}
+.left {
+  margin-left:40px;
+}
+
+.history-table-wrap{
+  position: absolute;
+  width: 668rpx;
+  height: 578rpx;
+  left: 50%;
+  margin-left: -334rpx;
+  top: 70rpx;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.testbox{
+  width: 400rpx;
+  /* height: 300rpx; */
+  background-color: dodgerblue;
+  
+}
+.box_item{
+  width: 60rpx;
+  height: 60rpx;
+  background-color: #fff;
+  margin: 10rpx;
+  border-radius:20px;
+   text-align: center
+}
+.fl {
+  float: left
+}
+.back{
+  width: 60rpx;
+  height: 60rpx;
+  background-color: #b2bbbe;
+  border-radius:25px;
+}
+.right{
+  background-color: #61ac85;
+}
+.wrong{
+  background-color: #ee3f4d;
+}

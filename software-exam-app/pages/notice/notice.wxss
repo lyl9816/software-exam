@@ -1,0 +1,4 @@
+/* pages/notice/notice.wxss */
+.title{
+  color: red
+}

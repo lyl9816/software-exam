@@ -1,0 +1,83 @@
+<!--index.wxml-->
+<!-- <view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+
+</view> -->
+
+
+<!--pages/main/main.wxml-->
+<i-notice-bar icon="systemprompt" loop>
+    2018年世界杯,将于6月14日至7月15日举行;2018年世界杯,将于6月14日至7月15日举行;
+</i-notice-bar>
+<i-grid>
+    <i-grid-item bindtap="goOnline">
+     <i-grid-icon>
+        <view>
+          <i-icon size="38" type="brush"  color="#c21f30"/>
+        </view>
+        </i-grid-icon>
+        <i-grid-label><view type="text" class="red">在线考试</view></i-grid-label>
+       
+    </i-grid-item>
+    <i-grid-item bindtap="goKnowledge">
+        <i-grid-icon>
+        <view>
+          <i-icon size="38" type="document"  color="#2376b7"/>
+        </view>
+        </i-grid-icon>
+        <i-grid-label><view type="text" class="blue">知识点</view></i-grid-label>
+    </i-grid-item>
+</i-grid>
+<i-grid>
+     <i-grid-item bindtap="goReal">
+        <i-grid-icon>
+        <view>
+          <i-icon size="38" type="barrage"  color="#f9a633"/>
+        </view>
+        </i-grid-icon>
+        <i-grid-label><view type="text" class="yellow">往年真题</view></i-grid-label>
+    </i-grid-item>
+</i-grid>
+<i-grid>
+ <i-grid-item bindtap="goProblems">
+        <i-grid-icon>
+        <view>
+          <i-icon size="38" type="other"  color="#1a6840"/>
+        </view>
+        </i-grid-icon>
+        <i-grid-label><view type="text" class="green">顺序题库</view></i-grid-label>
+    </i-grid-item>
+     <i-grid-item bindtap="goProblems">
+        <i-grid-icon>
+        <view>
+          <i-icon size="38" type="dynamic"  color="#681752"/>
+        </view>
+        </i-grid-icon>
+        <i-grid-label><view type="text" class="purple" >随机题库</view></i-grid-label>
+    </i-grid-item>
+</i-grid>
+<!-- 
+<navigator>
+<i-icon size="98" type="document" color="#2e4e7e" />
+<view class="text">duish</view>
+</navigator>
+
+<i-icon size="98" type="other" color="#2e4e7e" />
+
+
+<i-icon size="98" type="document" color="#2e4e7e" /> -->
+
+
+
+
+
+

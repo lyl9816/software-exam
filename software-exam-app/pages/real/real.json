@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "i-icon": "../../dist/icon/index",
+    "i-cell-group": "../../dist/cell-group/index",
+      "i-panel": "../../dist/panel/index"
+    },
+    "navigationBarTitleText": "往年真题"
+    
+}

@@ -1,0 +1,48 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/mine/mine",
+    "pages/knowledge/knowledge",
+    "pages/notice/notice",
+    "pages/problems/problems",
+    "pages/real/real",
+    "pages/collection/collection",
+    "pages/error/error",
+    "pages/test/test",
+    "pages/online/online"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "软考题库",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "backgroundColor": "#fafafa",
+    "borderStyle": "white",
+    "selectedColor": "#AB956D",
+    "color": "#666",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/images/category.png",
+        "selectedIconPath": "static/images/category@selected.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/notice/notice",
+        "iconPath": "static/images/home.png",
+        "selectedIconPath": "static/images/home@selected.png",
+        "text": "考试须知"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "iconPath": "static/images/my.png",
+        "selectedIconPath": "static/images/my@selected.png",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

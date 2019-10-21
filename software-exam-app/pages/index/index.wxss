@@ -1,0 +1,41 @@
+/**index.wxss**/
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+.red
+{
+  color: #c21f30;
+}
+.blue
+{
+  color: #2376b7;
+}
+.yellow
+{
+  color: #f9a633;
+}
+.green
+{
+  color: #1a6840;
+}
+.purple
+{
+  color: #681752;
+}

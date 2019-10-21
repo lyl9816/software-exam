@@ -1,0 +1,50 @@
+/* pages/mine/mine.wxss */
+page {
+
+    height: 100%; 
+
+}
+.head {
+
+  width: 100%;
+  height: 120px;
+  background: #5698c3;
+   /* border-radius: 10px; */
+
+}
+.name {
+  margin-top:30px;
+ 
+}
+.word {
+font-weight:bold;
+ font-size:large;
+}
+.userinfo {  
+  position: relative;  
+  width: 750rpx;  
+  height: 320rpx;  
+  color: #fff;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+}  
+  
+.userinfo-avatar {  
+  overflow:hidden;  
+  display: block;  
+  width: 160rpx;  
+  height: 160rpx;  
+  margin: 20rpx;  
+  margin-top: 50rpx;  
+  border-radius: 50%;  
+  border: 2px solid #fff;  
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);  
+}  
+  
+.userinfo{  
+  /* color: #fff; */  
+  font-size: 14px;  
+  background-color: #d0dfe6;  
+}
+ 

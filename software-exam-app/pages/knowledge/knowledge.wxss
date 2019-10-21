@@ -1,0 +1,4 @@
+/* pages/knowledge/knowledge.wxss */
+.font{
+  color: tomato;
+}

@@ -1,0 +1,5 @@
+<!--pages/test/test.wxml-->
+<i-panel title="name">
+    <i-input value="{{ name }}" maxlength="20" bind:change="nameInput" placeholder="名字" />
+</i-panel>
+<i-button bind:click="handleClick" type="success" shape="circle" size="large">{{test}}</i-button>
