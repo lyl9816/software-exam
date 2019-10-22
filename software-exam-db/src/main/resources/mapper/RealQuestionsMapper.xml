@@ -6,6 +6,15 @@
     <result column="qid" jdbcType="INTEGER" property="qid" />
     <result column="pid" jdbcType="INTEGER" property="pid" />
   </resultMap>
+
+  <resultMap id="BaseResultMap2" type="software.exam.db.model.dto.RealQuestionDto">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="qid" jdbcType="INTEGER" property="qid" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="lid" jdbcType="INTEGER" property="lid" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -176,4 +185,12 @@
       pid = #{pid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="seleteRealQuestions" resultMap="BaseResultMap2" parameterType="integer">
+SELECT r.id,r.qid,r.pid ,p.name ,q.title,q.lid
+from real_questions r,paper p,questions q
+where r.pid=p.id AND r.qid=q.id
+AND r.pid = #{id,jdbcType=INTEGER}
+AND q.lid=#{levelId,jdbcType=INTEGER}
+  </select>
 </mapper>

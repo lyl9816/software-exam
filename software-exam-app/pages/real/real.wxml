@@ -2,10 +2,23 @@
 <text></text>
 <view>
 
-<i-panel >
-<view style="padding: 15px;" >2019上半年软件设计师真题\t<image style="width:30px;height:30px" catchtap='handleCollection'  wx:if="{{!isCollected}}" src="/static/images/star.png"></image>
-<image catchtap='handleCollection' wx:if="{{isCollected}}" src="/static/images/star_selected.png" style="width:30px;height:30px" ></image></view> 
+<i-panel wx:for="{{papers}}" wx:key="id">
+<view style="padding: 15px;" bindtap="goToDetail" data-id="{{item.id}}">
+{{item.name}}
+<!-- 收藏 -->
+<!-- <image style="width:30px;height:30px" catchtap='handleCollection'  wx:if="{{!isCollected}}" src="/static/images/star.png">
+</image>
+<image catchtap='handleCollection' wx:if="{{isCollected}}" src="/static/images/star_selected.png" style="width:30px;height:30px" >
+</image> -->
+</view> 
 </i-panel>
+
+
+
+
+
+
+<!-- 
 <i-panel>
 <view style="padding: 15px;">2018下半年软件设计师真题\t<image style="width:30px;height:30px" catchtap='handleCollection'  wx:if="{{!isCollected}}" src="/static/images/star.png"></image>
 <image catchtap='handleCollection' wx:if="{{isCollected}}" src="/static/images/star_selected.png" style="width:30px;height:30px" ></image></view>
@@ -29,6 +42,6 @@
 <i-panel>
 <view style="padding: 15px;">2016上半年软件设计师真题\t<image style="width:30px;height:30px" catchtap='handleCollection'  wx:if="{{!isCollected}}" src="/static/images/star.png"></image>
 <image catchtap='handleCollection' wx:if="{{isCollected}}" src="/static/images/star_selected.png" style="width:30px;height:30px" ></image></view>
-</i-panel>
+</i-panel> -->
 
 </view>

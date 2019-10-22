@@ -9,7 +9,7 @@
     <i-tab key="tab2" title="背题模式"></i-tab>
 </i-tabs>
 </view>
-<!-- 题目： -->
+<!-- 题目： -->{{questions.title}}
 <view>
 <i-tag 
     class="i-tags" 
@@ -18,6 +18,8 @@
     单选
 </i-tag>
 <!-- 从数据库读取的题目....... -->
+<view>{{questions}}
+</view>
 </view>
 
 <!-- 选项： -->

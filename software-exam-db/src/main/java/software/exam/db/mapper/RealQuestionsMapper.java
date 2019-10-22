@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import software.exam.db.domain.RealQuestions;
 import software.exam.db.domain.RealQuestionsExample;
+import software.exam.db.model.dto.RealQuestionDto;
 
 public interface RealQuestionsMapper {
     long countByExample(RealQuestionsExample example);
@@ -27,4 +28,6 @@ public interface RealQuestionsMapper {
     int updateByPrimaryKeySelective(RealQuestions record);
 
     int updateByPrimaryKey(RealQuestions record);
+    //获取套卷题目
+    List<RealQuestionDto> seleteRealQuestions(Integer id,Integer levelId);
 }
