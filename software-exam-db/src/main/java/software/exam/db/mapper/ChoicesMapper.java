@@ -27,4 +27,7 @@ public interface ChoicesMapper {
     int updateByPrimaryKeySelective(Choices record);
 
     int updateByPrimaryKey(Choices record);
+
+    //根据Qid查询答案，并随机显示
+    List<Choices> randChoiceById(int qid);
 }

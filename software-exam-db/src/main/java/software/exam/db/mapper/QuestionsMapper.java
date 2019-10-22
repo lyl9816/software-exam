@@ -27,4 +27,7 @@ public interface QuestionsMapper {
     int updateByPrimaryKeySelective(Questions record);
 
     int updateByPrimaryKey(Questions record);
+
+    //根据等级id取出随机75条题目
+     List<Questions> limitAndRandAll(int Lid);
 }

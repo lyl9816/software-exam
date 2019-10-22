@@ -193,4 +193,10 @@
       cid = #{cid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="limitAndRandAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT * FROM questions WHERE lid = #{lid,jdbcType=INTEGER} ORDER BY RAND() LIMIT 75
+  </select>
+
+
 </mapper>

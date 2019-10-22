@@ -208,4 +208,9 @@
       rqid = #{rqid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="randChoiceById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT * FROM choices WHERE qid = #{qid,jdbcType=INTEGER} ORDER BY RAND()
+  </select>
+
 </mapper>
