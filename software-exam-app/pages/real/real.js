@@ -1,4 +1,7 @@
 // pages/real/real.js
+var util = require('../../utils/util.js');
+var api = require('../../config/api.js');
+var user = require('../../utils/user.js');
 Page({
 
   /**
@@ -9,9 +12,22 @@ Page({
     detailObj: {},
     index: null,
     // 是否收藏
-    isCollected: false
+    isCollected: false,
+    papers:[]
   },
-
+  getPapers:function(){
+    let that=this;
+    util.request(api.GetPapers).then(res => {
+      if (res.errno === 0) {
+        that.setData({
+          papers: res.data.allPapers
+        })
+        console.log(res.data.allPapers)
+      } else {
+  
+      }
+  })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -19,6 +35,7 @@ Page({
     //获取分类
     // var levelName = wx.getStorageSync('levelName');
     // console.log(levelName);
+    this.getPapers();
   },
   handleCollection() {
     let isCollected = !this.data.isCollected
@@ -33,7 +50,13 @@ Page({
     })
   },
   
- 
+
+  goToDetail:function(e){
+    var idt = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: "/pages/realpoblems/realproblems?id=" +idt
+    })
+  },
   
 
   /**
