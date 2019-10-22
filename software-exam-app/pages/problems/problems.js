@@ -1,5 +1,7 @@
 // pages/problems/problems.js
-
+var util = require('../../utils/util.js');
+var api = require('../../config/api.js');
+const { $Message } = require('../../dist/base/index');
 Page({
 
   /**
@@ -36,9 +38,12 @@ Page({
 
     total: 75,
     touchS: [0, 0],
-    touchE: [0, 0]
-   
-  },
+    touchE: [0, 0],
+    errormessage:"",
+    order: [],
+    count:1,
+    levelName: '初级',
+    },
   
 
   add:function(e){
@@ -94,58 +99,84 @@ Page({
   touchEnd: function (e) {
     let start = this.data.touchS
     let end = this.data.touchE
+    let that=this
     console.log(start)
     console.log(end)
+    
     if (start[0] < end[0] - 30) {
-      console.log('右滑')
-      wx.navigateTo({
-        url: '/pages/problems/problems',
-      })
+         wx.setStorageSync("counta", that.data.count-1);
+      console.log('右滑')//上一题
+      this.onLoad();
+
+    
     } else if (start[0] > end[0] + 30) {
-      console.log('左滑')
-      wx.navigateTo({
-        url: '/pages/problems/problems',
-      })
+       wx.setStorageSync("counta", that.data.count+1);
+      console.log('左滑')//下一题
+      this.onLoad();
+    
       
     } else {
       console.log('静止')
     }
   },
  
+ orderquestion:function(){
+   let that=this;
 
+  util.request(api.Orderquestion,{levelName:that.data.levelName}).then(function (res) {
+     if (res.errno===-1){
+       that.setData({
+         errormessage:res.errmsg
+       });
+     } else {
+        // console.log(res.data)
+        that.setData({
+          order:res.data
+        });
+        // console.log(that.data.order)
+     }
+   })
+ },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    var that = this
-  },
+  onLoad: function () {
+    var counta = wx.getStorageSync("counta");
+    console.log(counta)
+    if(counta){
+    this.setData({
+      count:counta
+     });
+    }
+   console.log(this.data.count)
+    var levelName = wx.getStorageSync('levelName');
+    this.setData({
+      levelName:levelName
+    });
+    this.orderquestion();
+    // console.log(this.data.order);
+   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+   
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+  
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    wx.removeStorageSync("counta");
   },
 
   /**
