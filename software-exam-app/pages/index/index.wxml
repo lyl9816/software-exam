@@ -18,6 +18,8 @@
 <i-notice-bar icon="systemprompt" loop>
     2018年世界杯,将于6月14日至7月15日举行;2018年世界杯,将于6月14日至7月15日举行;
 </i-notice-bar>
+
+
 <i-grid>
     <i-grid-item bindtap="goOnline">
      <i-grid-icon>
@@ -65,6 +67,22 @@
         <i-grid-label><view type="text" class="purple" >随机题库</view></i-grid-label>
     </i-grid-item>
 </i-grid>
+
+
+<view bindtap='toggleRight1'>
+    <image class="add_icon" src="/static/images/all_num.png"></image>
+</view>
+<i-drawer mode="right" visible="{{showRight1}}" bind:close="toggleRight1">
+    <view class="demo-container">
+        <!-- 单击遮罩层关闭 -->
+        <i-panel title="group-水果">
+            <i-radio-group current="{{current2}}" bindchange="handleFruitChange">
+        <i-radio wx:for="{{fruit}}" position="{{position}}" wx:key="{{item.id}}" value="{{item.name}}">
+        </i-radio>
+    </i-radio-group>
+</i-panel>
+    </view>
+</i-drawer>
 <!-- 
 <navigator>
 <i-icon size="98" type="document" color="#2e4e7e" />

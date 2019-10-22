@@ -8,7 +8,31 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    current: 'homepage'
+    current: 'homepage',
+    //分类等级
+    fruit: [
+      {id: 1, name: '初级',}, 
+      {id: 2,name: '中级'}, 
+      {id: 3,name: '高级'}
+    ],
+    current2: '初级',
+    position: 'left',
+    showRight1: false,
+  },
+  // 选项事件
+  handleFruitChange({ detail = {} }) {
+    this.setData({
+      current2: detail.value
+    });
+    // console.log(this.data.current2)
+    var levelName = this.data.current2;
+    wx.setStorageSync('levelName', levelName);
+  },
+  //抽屉事件
+  toggleRight1() {
+    this.setData({
+      showRight1: !this.data.showRight1
+    });
   },
   //事件处理函数
   bindViewTap: function() {
@@ -16,7 +40,18 @@ Page({
       url: '../logs/logs'
     })
   },
+  // level:function(id,name){
+  //   let that=this;
+  //   that.data.fruit.id
+  //   url.request(api.GetLevel,{
+  //     id:this.fruit.id,
+  //     name:name
+  //   })
+   
+  // },
   onLoad: function () {
+   //加载选择分类等级
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -77,6 +112,6 @@ Page({
     wx.navigateTo({
       url: '/pages/online/online',
     })
-
   }
+
 })

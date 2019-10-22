@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    levelName:'初级',
     detailObj: {},
     index: null,
     // 是否收藏
@@ -16,7 +16,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+    //获取分类
+    // var levelName = wx.getStorageSync('levelName');
+    // console.log(levelName);
   },
   handleCollection() {
     let isCollected = !this.data.isCollected
@@ -45,7 +47,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+   
   },
 
   /**
