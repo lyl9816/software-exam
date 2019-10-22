@@ -1,9 +1,11 @@
 package software.exam.db.mapper;
 
+import java.util.Iterator;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import software.exam.db.domain.Questions;
 import software.exam.db.domain.QuestionsExample;
+import software.exam.db.model.dto.QuestionsDto;
 
 public interface QuestionsMapper {
     long countByExample(QuestionsExample example);
@@ -30,4 +32,6 @@ public interface QuestionsMapper {
 
     //根据等级id取出随机75条题目
      List<Questions> limitAndRandAll(int Lid);
+     //获取题目和解析
+   List<QuestionsDto> selectAnalyze();
 }

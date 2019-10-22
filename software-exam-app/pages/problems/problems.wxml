@@ -1,14 +1,14 @@
 <!--pages/problems/problems.wxml-->
 
 <!-- 页面左右滑动 -->
-<view class='btn'  bindtouchstart='touchStart' bindtouchmove='touchMove' bindtouchend='touchEnd'>
-
+<view class='btn' bindtouchstart='touchStart' bindtouchmove='touchMove' bindtouchend='touchEnd'>
 <view>
 <i-tabs current="{{ current }}" bindchange="handleChange">
     <i-tab key="tab1" title="答题模式" color="#00BBFF"></i-tab>
     <i-tab key="tab2" title="背题模式"></i-tab>
 </i-tabs>
 </view>
+
 <!-- 题目： -->
 <view>
 <i-tag 
@@ -18,6 +18,7 @@
     单选
 </i-tag>
 <!-- 从数据库读取的题目....... -->
+<view>{{order[count-1].title}}</view>
 </view>
 
 <!-- 选项： -->

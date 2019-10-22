@@ -46,12 +46,12 @@ Page({
     },
   
 
-  add:function(e){
-    var $id = e.currentTarget.dataset.id;
-    console.log($id)
-    console.log("aaaaa")
-    this.data.num++;
-  },
+  // add:function(e){
+  //   var $id = e.currentTarget.dataset.id;
+  //   console.log($id)
+  //   console.log("aaaaa")
+  //   this.data.num++;
+  // },
   toggleRight1() {
     this.setData({
       showRight1: !this.data.showRight1
@@ -133,7 +133,7 @@ Page({
         that.setData({
           order:res.data
         });
-        // console.log(that.data.order)
+        console.log(that.data.order)
      }
    })
  },

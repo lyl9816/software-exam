@@ -7,6 +7,15 @@
     <result column="lid" jdbcType="INTEGER" property="lid" />
     <result column="cid" jdbcType="INTEGER" property="cid" />
   </resultMap>
+  <resultMap id="BaseResultMap1" type="software.exam.db.model.dto.QuestionsDto">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="lid" jdbcType="INTEGER" property="lid" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="qid" jdbcType="INTEGER" property="qid" />
+    <result column="detail" jdbcType="VARCHAR" property="detail" />
+    <result column="rqid" jdbcType="INTEGER" property="rqid" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -197,6 +206,7 @@
   <select id="limitAndRandAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     SELECT * FROM questions WHERE lid = #{lid,jdbcType=INTEGER} ORDER BY RAND() LIMIT 75
   </select>
-
-
+<select id="selectAnalyze" resultMap="BaseResultMap1">
+  select * from questions q,`analyze` a where a.qid=q.id
+</select>
 </mapper>

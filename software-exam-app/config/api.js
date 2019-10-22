@@ -7,6 +7,7 @@ var WxApiRoot = 'http://localhost:8080/';
 //var WxApiRoot = 'http://wechat.kiwi1.cn/wx/';
 
 module.exports = {
+  Orderquestion: WxApiRoot + 'orderQuestion',
   IndexUrl: WxApiRoot + 'home', //首页数据接口
   GetMsgNumber: WxApiRoot + 'sysmsg/getNum', //获取消息数
   GetMsgList: WxApiRoot + 'sysmsg/getAllMsg', //获取消息列
