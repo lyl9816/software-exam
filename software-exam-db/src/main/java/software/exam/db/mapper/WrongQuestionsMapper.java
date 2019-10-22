@@ -1,9 +1,9 @@
 package software.exam.db.mapper;
 
-import software.exam.db.domain.WrongQuestions;
-import software.exam.db.domain.WrongQuestionsExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import software.exam.db.domain.WrongQuestions;
+import software.exam.db.domain.WrongQuestionsExample;
 
 public interface WrongQuestionsMapper {
     long countByExample(WrongQuestionsExample example);

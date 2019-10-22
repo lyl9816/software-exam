@@ -1,9 +1,9 @@
 package software.exam.db.mapper;
 
-import software.exam.db.domain.Choices;
-import software.exam.db.domain.ChoicesExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import software.exam.db.domain.Choices;
+import software.exam.db.domain.ChoicesExample;
 
 public interface ChoicesMapper {
     long countByExample(ChoicesExample example);

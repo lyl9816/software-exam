@@ -1,16 +1,19 @@
 package core.service.impl;
 
 import core.service.LoginService;
+
+import software.exam.db.domain.UserExample;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import software.exam.db.domain.User;
-import software.exam.db.domain.UserExample;
 import software.exam.db.mapper.UserMapper;
+
 
 @Service
 public class LoginServiceImpl implements LoginService {
-    @Autowired
-    UserMapper userMapper;
+   @Autowired
+   UserMapper userMapper;
 
     /**
      * 根据openid查找
@@ -20,7 +23,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public User selectByOpenid(String openId) {
         UserExample userExample=new UserExample();
-        userExample.or().andWeixinOpenidEqualTo(openId).andDeletedEqualTo(false);
+        userExample.or().andWeixinOpenidEqualTo(openId);
         return userMapper.selectUserByExample(userExample);
     }
 

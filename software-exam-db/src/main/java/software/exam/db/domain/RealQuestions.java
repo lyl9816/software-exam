@@ -3,11 +3,7 @@ package software.exam.db.domain;
 public class RealQuestions {
     private Integer id;
 
-    private String title;
-
-    private Integer lid;
-
-    private Integer cid;
+    private Integer qid;
 
     private Integer pid;
 
@@ -19,28 +15,12 @@ public class RealQuestions {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public Integer getQid() {
+        return qid;
     }
 
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
-    }
-
-    public Integer getLid() {
-        return lid;
-    }
-
-    public void setLid(Integer lid) {
-        this.lid = lid;
-    }
-
-    public Integer getCid() {
-        return cid;
-    }
-
-    public void setCid(Integer cid) {
-        this.cid = cid;
+    public void setQid(Integer qid) {
+        this.qid = qid;
     }
 
     public Integer getPid() {

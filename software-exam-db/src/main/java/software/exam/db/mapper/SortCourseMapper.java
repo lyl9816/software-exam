@@ -1,9 +1,9 @@
 package software.exam.db.mapper;
 
-import software.exam.db.domain.SortCourse;
-import software.exam.db.domain.SortCourseExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import software.exam.db.domain.SortCourse;
+import software.exam.db.domain.SortCourseExample;
 
 public interface SortCourseMapper {
     long countByExample(SortCourseExample example);

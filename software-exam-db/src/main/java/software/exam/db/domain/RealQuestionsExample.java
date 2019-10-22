@@ -164,193 +164,63 @@ public class RealQuestionsExample {
             return (Criteria) this;
         }
 
-        public Criteria andTitleIsNull() {
-            addCriterion("title is null");
+        public Criteria andQidIsNull() {
+            addCriterion("qid is null");
             return (Criteria) this;
         }
 
-        public Criteria andTitleIsNotNull() {
-            addCriterion("title is not null");
+        public Criteria andQidIsNotNull() {
+            addCriterion("qid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTitleEqualTo(String value) {
-            addCriterion("title =", value, "title");
+        public Criteria andQidEqualTo(Integer value) {
+            addCriterion("qid =", value, "qid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleNotEqualTo(String value) {
-            addCriterion("title <>", value, "title");
+        public Criteria andQidNotEqualTo(Integer value) {
+            addCriterion("qid <>", value, "qid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleGreaterThan(String value) {
-            addCriterion("title >", value, "title");
+        public Criteria andQidGreaterThan(Integer value) {
+            addCriterion("qid >", value, "qid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleGreaterThanOrEqualTo(String value) {
-            addCriterion("title >=", value, "title");
+        public Criteria andQidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("qid >=", value, "qid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleLessThan(String value) {
-            addCriterion("title <", value, "title");
+        public Criteria andQidLessThan(Integer value) {
+            addCriterion("qid <", value, "qid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleLessThanOrEqualTo(String value) {
-            addCriterion("title <=", value, "title");
+        public Criteria andQidLessThanOrEqualTo(Integer value) {
+            addCriterion("qid <=", value, "qid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleLike(String value) {
-            addCriterion("title like", value, "title");
+        public Criteria andQidIn(List<Integer> values) {
+            addCriterion("qid in", values, "qid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleNotLike(String value) {
-            addCriterion("title not like", value, "title");
+        public Criteria andQidNotIn(List<Integer> values) {
+            addCriterion("qid not in", values, "qid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleIn(List<String> values) {
-            addCriterion("title in", values, "title");
+        public Criteria andQidBetween(Integer value1, Integer value2) {
+            addCriterion("qid between", value1, value2, "qid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleNotIn(List<String> values) {
-            addCriterion("title not in", values, "title");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitleBetween(String value1, String value2) {
-            addCriterion("title between", value1, value2, "title");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitleNotBetween(String value1, String value2) {
-            addCriterion("title not between", value1, value2, "title");
-            return (Criteria) this;
-        }
-
-        public Criteria andLidIsNull() {
-            addCriterion("lid is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLidIsNotNull() {
-            addCriterion("lid is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLidEqualTo(Integer value) {
-            addCriterion("lid =", value, "lid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLidNotEqualTo(Integer value) {
-            addCriterion("lid <>", value, "lid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLidGreaterThan(Integer value) {
-            addCriterion("lid >", value, "lid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("lid >=", value, "lid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLidLessThan(Integer value) {
-            addCriterion("lid <", value, "lid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLidLessThanOrEqualTo(Integer value) {
-            addCriterion("lid <=", value, "lid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLidIn(List<Integer> values) {
-            addCriterion("lid in", values, "lid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLidNotIn(List<Integer> values) {
-            addCriterion("lid not in", values, "lid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLidBetween(Integer value1, Integer value2) {
-            addCriterion("lid between", value1, value2, "lid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLidNotBetween(Integer value1, Integer value2) {
-            addCriterion("lid not between", value1, value2, "lid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCidIsNull() {
-            addCriterion("cid is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCidIsNotNull() {
-            addCriterion("cid is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCidEqualTo(Integer value) {
-            addCriterion("cid =", value, "cid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCidNotEqualTo(Integer value) {
-            addCriterion("cid <>", value, "cid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCidGreaterThan(Integer value) {
-            addCriterion("cid >", value, "cid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("cid >=", value, "cid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCidLessThan(Integer value) {
-            addCriterion("cid <", value, "cid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCidLessThanOrEqualTo(Integer value) {
-            addCriterion("cid <=", value, "cid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCidIn(List<Integer> values) {
-            addCriterion("cid in", values, "cid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCidNotIn(List<Integer> values) {
-            addCriterion("cid not in", values, "cid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCidBetween(Integer value1, Integer value2) {
-            addCriterion("cid between", value1, value2, "cid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCidNotBetween(Integer value1, Integer value2) {
-            addCriterion("cid not between", value1, value2, "cid");
+        public Criteria andQidNotBetween(Integer value1, Integer value2) {
+            addCriterion("qid not between", value1, value2, "qid");
             return (Criteria) this;
         }
 

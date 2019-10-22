@@ -1,9 +1,9 @@
 package software.exam.db.mapper;
 
-import software.exam.db.domain.SecondTitle;
-import software.exam.db.domain.SecondTitleExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import software.exam.db.domain.SecondTitle;
+import software.exam.db.domain.SecondTitleExample;
 
 public interface SecondTitleMapper {
     long countByExample(SecondTitleExample example);

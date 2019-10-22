@@ -18,7 +18,7 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!--生成Model类存放位置-->
-        <javaModelGenerator targetPackage="db.domain" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="software.exam.db.domain" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -32,7 +32,7 @@
                 type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
                 type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
         -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="db.mapper" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="software.exam.db.mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         
@@ -50,6 +50,7 @@
         <table tableName="sort_level" domainObjectName="SortLevel"></table>
         <table tableName="user" domainObjectName="User"></table>
         <table tableName="wrong_questions" domainObjectName="WrongQuestions"></table>
+
 
     </context>
 

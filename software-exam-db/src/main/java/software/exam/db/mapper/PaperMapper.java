@@ -1,9 +1,9 @@
 package software.exam.db.mapper;
 
-import software.exam.db.domain.Paper;
-import software.exam.db.domain.PaperExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import software.exam.db.domain.Paper;
+import software.exam.db.domain.PaperExample;
 
 public interface PaperMapper {
     long countByExample(PaperExample example);

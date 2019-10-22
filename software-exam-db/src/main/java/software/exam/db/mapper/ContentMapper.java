@@ -1,9 +1,9 @@
 package software.exam.db.mapper;
 
-import software.exam.db.domain.Content;
-import software.exam.db.domain.ContentExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import software.exam.db.domain.Content;
+import software.exam.db.domain.ContentExample;
 
 public interface ContentMapper {
     long countByExample(ContentExample example);

@@ -1,9 +1,9 @@
 package software.exam.db.mapper;
 
-import software.exam.db.domain.RealQuestions;
-import software.exam.db.domain.RealQuestionsExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import software.exam.db.domain.RealQuestions;
+import software.exam.db.domain.RealQuestionsExample;
 
 public interface RealQuestionsMapper {
     long countByExample(RealQuestionsExample example);

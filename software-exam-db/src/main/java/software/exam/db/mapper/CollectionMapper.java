@@ -1,9 +1,9 @@
 package software.exam.db.mapper;
 
-import software.exam.db.domain.Collection;
-import software.exam.db.domain.CollectionExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import software.exam.db.domain.Collection;
+import software.exam.db.domain.CollectionExample;
 
 public interface CollectionMapper {
     long countByExample(CollectionExample example);

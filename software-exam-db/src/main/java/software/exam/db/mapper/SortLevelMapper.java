@@ -1,9 +1,9 @@
 package software.exam.db.mapper;
 
-import software.exam.db.domain.SortLevel;
-import software.exam.db.domain.SortLevelExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import software.exam.db.domain.SortLevel;
+import software.exam.db.domain.SortLevelExample;
 
 public interface SortLevelMapper {
     long countByExample(SortLevelExample example);
