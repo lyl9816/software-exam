@@ -48,3 +48,6 @@
 .wrong{
   background-color: #ee3f4d;
 }
+.textcolor{
+  color: red
+}

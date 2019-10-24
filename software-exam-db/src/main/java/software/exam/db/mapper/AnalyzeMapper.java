@@ -27,4 +27,6 @@ public interface AnalyzeMapper {
     int updateByPrimaryKeySelective(Analyze record);
 
     int updateByPrimaryKey(Analyze record);
+
+    Analyze selectByRqid(Integer rqid);
 }

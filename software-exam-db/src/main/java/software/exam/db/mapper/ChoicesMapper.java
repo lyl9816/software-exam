@@ -30,4 +30,6 @@ public interface ChoicesMapper {
 
     //根据Qid查询答案，并随机显示
     List<Choices> randChoiceById(int qid);
+    //根据rqid查询答案，并随机显示
+    List<Choices> randChoiceByRqid(Integer rqid);
 }

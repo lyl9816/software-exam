@@ -1,7 +1,5 @@
 <!--pages/realpoblems/realproblems.wxml-->
 
-<!-- 页面左右滑动 -->
-<view class='btn'  bindtouchstart='touchStart' bindtouchmove='touchMove' bindtouchend='touchEnd'>
 
 <view>
 <i-tabs current="{{ current }}" bindchange="handleChange">
@@ -9,7 +7,7 @@
     <i-tab key="tab2" title="背题模式"></i-tab>
 </i-tabs>
 </view>
-<!-- 题目： -->{{questions.title}}
+<!-- 题目： -->
 <view>
 <i-tag 
     class="i-tags" 
@@ -18,31 +16,37 @@
     单选
 </i-tag>
 <!-- 从数据库读取的题目....... -->
-<view>{{questions}}
-</view>
+    <view class='btn'  bindtouchstart='touchStart' bindtouchmove='touchMove' bindtouchend='touchEnd'>{{questions[count-1].title}}</view>
 </view>
 
 <!-- 选项： -->
 <view>
 <i-panel title="group-水果">
-    <i-radio-group current="{{current}}" bindchange="handleFruitChange">
-        <i-radio wx:for="{{fruit}}" position="{{position}}" wx:key="{{item.id}}" value="{{item.name}}">
+    <i-radio-group current="{{current2}}" bindchange="handleFruitChange">
+        <i-radio  wx:for="{{questions[count-1].choices}}" position="{{position}}" wx:key="{{item.id}}" value="{{item.content}}" >
         </i-radio>
     </i-radio-group>
 </i-panel>
+<!-- 答案不正确 -->
+  <view wx:if="{{current2}}">
+    <view wx:if="{{!flag}}" class="textcolor">答案不正确
+    </view>
+  </view>
 </view>
+<!-- 页面左右滑动 -->
+<view class='btn'  bindtouchstart='touchStart' bindtouchmove='touchMove' bindtouchend='touchEnd'>
 <!-- 答案解析： -->
-<view class="caption-wrap">
-    <i-collapse name="{{name}}">
-        <i-collapse-item title="答案解析：" name="name1">
-            <view slot="content">
-                史蒂夫·乔布斯（Steve Jobs），1955年2月24日生于美国加利福尼亚州旧金山，美国发明家、企业家、美国苹果公司联合创办人。
-            </view>
-        </i-collapse-item>
-    </i-collapse>
-    
-</view>
-
+<view wx:if="{{current2}}">
+    <view class="caption-wrap" wx:if="{{!flag}}">
+      <i-collapse name="{{name}}">
+          <i-collapse-item title="答案解析：" name="name1">
+              <view slot="content">
+                {{questions[count-1].detail}}
+              </view>
+          </i-collapse-item>
+      </i-collapse> 
+    </view>
+  </view>
 </view>
 
 
@@ -54,11 +58,11 @@
    <image class="left" style="width:30px;height:30px" catchtap='handleCollection'  wx:if="{{!isCollected}}" src="/static/images/star.png"></image>
 <image  class="left" catchtap='handleCollection' wx:if="{{isCollected}}" src="/static/images/star_selected.png" style="width:30px;height:30px" ></image>
 <!-- 对错 -->
-    <i-badge class="left" count="3">
+    <i-badge class="left" count="{{isright.length}}">
         <view class="demo-badge"><i-icon type="right"  size="28" color="color" />
         </view>
     </i-badge>
-    <i-badge  class="left"color="green" count="3">
+    <i-badge class="left"color="green" count="{{iswrong.length}}">
         <view class="demo-badge"> <i-icon  type="close" size="28" color="color" />
         </view>
     </i-badge>
@@ -73,9 +77,9 @@
    <scroll-view scroll-y="true" style="height: 300px">
    
     <view  class="testbox">
-    <view  class="box_item fl" wx:for="{{total}}" wx:key="index">
-
-    <view class="back">{{index+1}}</view>
+    <view  class="box_item fl" wx:for="{{total}}" wx:key="index" >
+    
+    <view class="back" bindtap="choiceTid">{{index+1}}</view>
        
     </view>
    </view>

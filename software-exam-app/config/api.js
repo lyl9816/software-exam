@@ -17,6 +17,9 @@ module.exports = {
   GetMsgList: WxApiRoot + 'sysmsg/getAllMsg', //获取消息列
   GetMsgDetail: WxApiRoot + 'sysmsg/getDetail/', //获取消息详细
   GetLevel: WxApiRoot+'getLevel',//获取分类等级
+  GetPapers: WxApiRoot+'paperInfo',//获取往年卷题
+  GetRealQuset: WxApiRoot+'getRealQuestions/',//获取真题题目
+
 
   AuthLoginByWeixin: WxApiRoot + 'login_by_weixin', //微信登录
   

@@ -9,12 +9,12 @@ Page({
    */
   data: {
     fruit: [
-      {id: 1,name: '香蕉',}, 
+    {id: 1,name: '香蕉',}, 
     {id: 2,name: '苹果'}, 
     {id: 3,name: '西瓜'}, 
     {id: 4,name: '葡萄',}
     ],
-    current: '苹果',
+    current2: '',
     position: 'left',
     // 答案解析data
     name: 'name1',
@@ -23,19 +23,24 @@ Page({
     index: null,
     // 是否收藏
     isCollected: false,
-
+    //抽屉、划页
     current: 'tab1',
     current_scroll: 'tab1',
     showRight1: false,
-
-    total: 75,
+    total: '',
     touchS: [0, 0],
     touchE: [0, 0],
-    questions:[],
+
+    questions:[],//真题题目
    // id:'',//套卷id
     errormessage: "",
     count: 1,
     levelName: '初级',
+    flag:'',//选项对错
+
+    isright:[],//答对的题目
+    iswrong:[],//答错的题目
+    
 
   },
   toggleRight1() {
@@ -46,8 +51,38 @@ Page({
   // 选项选择事件
   handleFruitChange({ detail = {} }) {
     this.setData({
-      current: detail.value
+      current2: detail.value
     });
+    console.log("选中的选项为："+this.data.current2)
+    // console.log("1111111" + this.data.questions[this.data.count - 1].choices)
+    for (var i = 0; i < this.data.questions[this.data.count - 1].choices.length;i++){
+      if (this.data.questions[this.data.count - 1].choices[i].content===this.data.current2){
+        if (this.data.questions[this.data.count - 1].choices[i].status===1){//答对题目
+          //答对题目存入数组
+          let righttemp = this.data.isright
+          var rr = i + 1;
+          righttemp.push(rr)
+            this.setData({
+              flag:true,
+              isright: righttemp,
+            })
+           
+          }else{//答错题目
+          //答错题目存入数组
+          let wrongtemp = this.data.iswrong
+          var ww = i + 1;
+          wrongtemp.push(ww)
+          this.setData({
+            flag: false,
+            iswrong: wrongtemp,
+          })
+         
+          }
+        }
+    }
+    console.log("flag:"+this.data.flag)
+    console.log('isright[]:'+this.data.isright.length)
+    console.log('iswrong[]:' + this.data.iswrong.length)
   },
   handleChange({ detail }) {
     this.setData({
@@ -94,25 +129,17 @@ Page({
       console.log('右滑')//上一题
       this.onLoad();
 
-
     } else if (start[0] > end[0] + 30) {
       wx.setStorageSync("counta", that.data.count + 1);
       console.log('左滑')//下一题
       this.onLoad();
-
 
     } else {
       console.log('静止')
     }
   },
 
-  add: function (e) {
-    var $id = e.currentTarget.dataset.id;
-    console.log($id)
-    console.log("aaaaa")
-    this.data.num++;
-  },
-  //获取真题题目
+  //获取真题
   getDetils:function(){
     var id=wx.getStorageSync("id");
     let that=this;
@@ -120,22 +147,28 @@ Page({
     util.request(api.GetRealQuset+id+"/"+levelName+"/").then(res=>{
       if (res.errno === 0) {
         that.setData({
-          questions: res.data.allQuestions
+          questions: res.data.allQuestions,
+          total: res.data.allQuestions.length
         })
+        //console.log("1111111111111111111111111111")
         //console.log(res.data.allQuestions)
+        console.log("total:" +this.data.total)
       } else {
       }
     })
   },
-
+  //选择题号跳转
+  choiceTid: function (){
+   
+    console.log("index:" + this.data.index)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
-    
+    //页面计数
      var counta = wx.getStorageSync("counta");
-     console.log(counta)
+     console.log("counta:"+counta)
     if (counta) {
       this.setData({
         count: counta,
@@ -145,8 +178,8 @@ Page({
     // that.setData({
     //   id: options.id
     // })
-    // this.getDetils();
-  
+     this.getDetils();
+      this.choiceTid();
   },
 
   /**

@@ -192,5 +192,10 @@
       detail = #{detail,jdbcType=VARCHAR},
       rqid = #{rqid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
-  </update>
+</update>
+
+  <select id="selectByRqid" resultMap="BaseResultMap" parameterType="integer">
+    SELECT detail FROM `analyze`
+    WHERE rqid=#{rqid,jdbcType=INTEGER}
+  </select>
 </mapper>

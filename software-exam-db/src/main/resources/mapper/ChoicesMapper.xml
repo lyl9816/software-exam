@@ -8,6 +8,7 @@
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="rqid" jdbcType="INTEGER" property="rqid" />
   </resultMap>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -211,5 +212,10 @@
 
   <select id="randChoiceById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     SELECT * FROM choices WHERE qid = #{qid,jdbcType=INTEGER} ORDER BY RAND()
+  </select>
+
+  <select id="randChoiceByRqid" parameterType="integer" resultMap="BaseResultMap">
+    SELECT c.`status`,c.content,c.rqid from choices c
+    where c.rqid = #{rqid,jdbcType=INTEGER} ORDER BY RAND()
   </select>
 </mapper>
