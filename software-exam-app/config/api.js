@@ -7,6 +7,7 @@ var WxApiRoot = 'http://localhost:8080/';
 //var WxApiRoot = 'http://wechat.kiwi1.cn/wx/';
 
 module.exports = {
+  WrongQuestions: WxApiRoot + 'wrongQuestions',//错题
   CancelCollection: WxApiRoot +'cancelCollection',//取消收藏
   CollectionQuestions: WxApiRoot+'collectionQuestions',//收藏
   Orderquestion: WxApiRoot + 'orderQuestion',//顺序题库

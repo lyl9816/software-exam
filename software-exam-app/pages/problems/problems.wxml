@@ -24,8 +24,8 @@
 </view></view>
 
 <!-- 背题模式正确答案 -->
-<view wx:if="{{current=='tab2'}}" style="color:green;margin-top:20px">答案：{{order[count-1].content}}</view>
-
+<view wx:if="{{current=='tab2'&&choice==''}}" style="color:green;margin-top:20px">答案：{{order[count-1].content}}</view>
+<view wx:if="{{current=='tab2'&&choice}}" style="color:green;margin-top:20px">答案：{{choice}}</view>
 
 <!-- 选项： -->
 <view wx:if="{{current=='tab1'}}">
@@ -60,7 +60,7 @@
 <!-- 底部 -->
 <view class="top">
 <!-- 返回首页 -->
-<image style="width:30px;height:30px;" src="/static/images/home.png"></image>
+<image style="width:30px;height:30px;" src="/static/images/home.png" catchtap="goHome"></image>
 <!-- 收藏 -->
    <image class="left" style="width:30px;height:30px" catchtap='handleCollection'  wx:if="{{isCollected==false}}" src="/static/images/star.png"></image>
 <image  class="left" catchtap='handleCollection' wx:if="{{isCollected==true}}" src="/static/images/star_selected.png" style="width:30px;height:30px" ></image>

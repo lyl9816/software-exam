@@ -46,7 +46,8 @@ Page({
     error:0,
     pagenum:[],
     currents:[],//选过的选项，
-    sort:""
+    sort:"",
+    choice:""
 
     },
   
@@ -77,6 +78,11 @@ Page({
       }
      
     }
+    //错题
+    console.log(this.data.flag)
+    if (this.data.flag == false) {
+      this.wrongQuestions();
+    }
 
   },
 
@@ -84,17 +90,26 @@ Page({
     this.setData({
       current: detail.key
     });
+    if (this.data.sort == 2){
     if(this.data.current==='tab1'){
       this.orderquestion();
     }else{
-      console
       this.showAnswer();
+    }
+    }
+    if (this.data.sort == 1) {
+      if (this.data.current === 'tab1') {
+        this.randomQuestion();
+      } else {
+        this.randomshowAnswer();
+      }
     }
   },
   //收藏
   handleCollection() {
 
     let isCollected = !this.data.order[this.data.count - 1].collection;
+    this.data.order[this.data.count - 1].collection=isCollected;
     this.setData({
       // 下面本来是这样子的:isCollected=isCollected,可以简写
       isCollected
@@ -116,7 +131,7 @@ collection:function(){
   var index=this.data.count
    var qid= this.data.order[index-1].qid
   let userInfo = wx.getStorageSync('userInfo');
-  console.log(userInfo.nickName);
+  //console.log(userInfo.nickName);
   util.request(api.CollectionQuestions, { qid: qid, nickName: userInfo.nickName}).then(function(res){
   });
 },
@@ -150,8 +165,22 @@ collection:function(){
     if (start[0] < end[0] - 30) {
          wx.setStorageSync("counta", that.data.count-1);
       console.log('右滑')//上一题
-      
-      this.onLoad();
+      if(that.data.count>0){
+        this.onLoad();
+      }
+      if (that.data.count==1){
+        wx.showToast({
+        title: '已是第一题',
+      })
+    
+      }
+      if (this.data.sort == 1) {
+        if (this.data.current === 'tab1') {
+          this.randomQuestion();
+        } else {
+          this.randomshowAnswer();
+        }
+      }
 
     
     } else if (start[0] > end[0] + 30) {
@@ -167,7 +196,27 @@ collection:function(){
           error: that.data.error + 1
           });
       }
-      this.onLoad();
+      if(that.data.count<that.data.order.length){
+        this.onLoad();
+        
+      }else{
+        wx.showToast({
+          title: '已是最后一题',
+        })
+      }
+      if (this.data.sort == 1) {
+        if (this.data.current === 'tab1') {
+          this.randomQuestion();
+        } else {
+          this.randomshowAnswer();
+        }
+      }
+      //错题
+      // console.log(this.data.flag)
+      // if(this.data.flag==false){
+      //   this.wrongQuestions();
+      // }
+    
 
     } else {
       console.log('静止')
@@ -202,11 +251,23 @@ collection:function(){
           order:res.data,
         });
     console.log(that.data.order)
-       console.log(that.data.total)
+     //  console.log(that.data.total)
      }
 
    })
  },
+//随机背题模式
+  randomshowAnswer:function(){
+      for(var i=0;i< this.data.order[this.data.count-1].choices.length;i++)
+      {
+        if (this.data.order[this.data.count - 1].choices[i].status==1){
+          this.setData({
+            choice: this.data.order[this.data.count - 1].choices[i].content
+          })
+        }
+
+      }
+  },
   //  随机题库答题模式
   randomQuestion: function () {
 
@@ -243,6 +304,20 @@ collection:function(){
 
   })
 },
+//错题
+  wrongQuestions:function(){
+    let that = this;
+    var index = this.data.count
+    var qid = this.data.order[index - 1].qid
+    let userInfo = wx.getStorageSync('userInfo');
+    util.request(api.WrongQuestions, { qid: qid, nickName: userInfo.nickName }).then(function (res) {
+    });
+  },
+  goHome() {
+    wx.switchTab({
+      url: '/pages/index/index',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -250,11 +325,10 @@ collection:function(){
     if(e!=null){
     this.setData({
       sort:e.sort
-    })
-    console.log("+==========="+this.data.sort)
+    });
     }
     var counta = wx.getStorageSync("counta");
-    console.log(counta)
+   // console.log(counta)
     if(counta){
     this.setData({
       count:counta,
@@ -294,6 +368,7 @@ collection:function(){
    },
 
 
+
   /**
    * 生命周期函数--监听页面显示
    */
@@ -326,6 +401,8 @@ collection:function(){
       pagenum:[],
       count:1,
       currents: [],
+      choice:"",
+      errormessage:""
      
     });
    // console.log(this.data.current)

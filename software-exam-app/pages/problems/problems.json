@@ -12,7 +12,9 @@
           "i-tab-bar-item": "../../dist/tab-bar-item/index",
           "i-badge": "../../dist/badge/index",
           "i-button": "../../dist/button/index",
-          "i-drawer": "../../dist/drawer/index"
+          "i-drawer": "../../dist/drawer/index",
+            "i-message": "../../dist/message/index"
+          
   },
   "navigationBarTitleText": "题库"
   

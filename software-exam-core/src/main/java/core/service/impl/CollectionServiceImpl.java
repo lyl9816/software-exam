@@ -20,7 +20,7 @@ public class CollectionServiceImpl implements CollectionService {
     @Override
     public int add(Collection collection) {
         int insert=0;
-        boolean flag=false;
+        boolean flag=true;
         CollectionExample collectionExample=new CollectionExample();
         CollectionExample.Criteria criteria=collectionExample.createCriteria();
         criteria.andIdIsNotNull();
