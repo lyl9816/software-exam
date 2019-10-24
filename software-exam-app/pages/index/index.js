@@ -102,9 +102,14 @@ Page({
       url: '/pages/real/real',
     })
   },
-  goProblems(){
+  goOrderProblems(){
     wx.navigateTo({
-      url: '/pages/problems/problems',
+      url: '/pages/problems/problems?sort='+2,
+    })
+  },
+  goProblems() {
+    wx.navigateTo({
+      url: '/pages/problems/problems?sort='+1,
     })
   },
   goOnline()

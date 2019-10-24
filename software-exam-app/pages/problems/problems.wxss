@@ -42,6 +42,12 @@
   background-color: #b2bbbe;
   border-radius:25px;
 }
+.choose{
+  width: 60rpx;
+  height: 60rpx;
+  background-color:blue;
+  border-radius:25px;
+}
 .right{
   background-color: #61ac85;
 }

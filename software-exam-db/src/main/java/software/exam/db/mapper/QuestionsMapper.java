@@ -32,6 +32,9 @@ public interface QuestionsMapper {
 
     //根据等级id取出随机75条题目
      List<Questions> limitAndRandAll(int Lid);
-     //获取题目和解析
-   List<QuestionsDto> selectAnalyze();
+     //根据分类获取题目和对应的科目
+   List<QuestionsDto> selectAnalyze(Integer level);
+    //    根据分类获取题目和对应的科目以及正确答案
+    List<QuestionsDto> selectAnswerByLevel(int level);
+    List<QuestionsDto> selectRandom(int level);
 }

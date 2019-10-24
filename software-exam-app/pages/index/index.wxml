@@ -50,7 +50,7 @@
     </i-grid-item>
 </i-grid>
 <i-grid>
- <i-grid-item bindtap="goProblems">
+ <i-grid-item bindtap="goOrderProblems">
         <i-grid-icon>
         <view>
           <i-icon size="38" type="other"  color="#1a6840"/>

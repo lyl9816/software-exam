@@ -176,4 +176,8 @@
       qid = #{qid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+<!--  根据题目id获取-->
+<select id="selectByQid" resultMap="BaseResultMap" parameterType="int">
+  select * from collection where qid=#{qid,jdbcType=INTEGER}
+</select>
 </mapper>

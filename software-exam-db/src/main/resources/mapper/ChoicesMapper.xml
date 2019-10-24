@@ -212,5 +212,4 @@
   <select id="randChoiceById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     SELECT * FROM choices WHERE qid = #{qid,jdbcType=INTEGER} ORDER BY RAND()
   </select>
-
 </mapper>

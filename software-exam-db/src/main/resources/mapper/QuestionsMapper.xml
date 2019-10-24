@@ -15,6 +15,8 @@
     <result column="qid" jdbcType="INTEGER" property="qid" />
     <result column="detail" jdbcType="VARCHAR" property="detail" />
     <result column="rqid" jdbcType="INTEGER" property="rqid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -202,11 +204,22 @@
       cid = #{cid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
+<!--随机75题-->
   <select id="limitAndRandAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     SELECT * FROM questions WHERE lid = #{lid,jdbcType=INTEGER} ORDER BY RAND() LIMIT 75
   </select>
-<select id="selectAnalyze" resultMap="BaseResultMap1">
-  select * from questions q,`analyze` a where a.qid=q.id
+<!--    根据分类获取题目和对应的科目-->
+<select id="selectAnalyze" resultMap="BaseResultMap1" parameterType="Integer">
+  select q.*,a.*,s.`name` from questions q,`analyze` a,sort_course s  where a.qid=q.id and q.cid=s.id and q.lid=#{level,jdbcType=INTEGER}
 </select>
+<!--    根据分类获取题目和对应的科目以及正确答案-->
+    <select id="selectAnswerByLevel" parameterType="int" resultMap="BaseResultMap1">
+        select q.*,a.*,s.`name`,c.`content` from questions q,`analyze` a,sort_course s ,choices c
+         where a.qid=q.id and q.cid=s.id and q.lid=#{level,jdbcType=INTEGER} and c.qid=q.id and c.status=1
+    </select>
+  <!--随机题库-->
+  <select id="selectRandom" parameterType="java.lang.Integer" resultMap="BaseResultMap1">
+    SELECT q.*,a.*, s.`name` FROM questions q ,`analyze` a,sort_course s
+     WHERE lid = 1 and q.id=a.qid and q.cid=s.id ORDER BY RAND()
+  </select>
 </mapper>

@@ -7,7 +7,11 @@ var WxApiRoot = 'http://localhost:8080/';
 //var WxApiRoot = 'http://wechat.kiwi1.cn/wx/';
 
 module.exports = {
-  Orderquestion: WxApiRoot + 'orderQuestion',
+  CancelCollection: WxApiRoot +'cancelCollection',//取消收藏
+  CollectionQuestions: WxApiRoot+'collectionQuestions',//收藏
+  Orderquestion: WxApiRoot + 'orderQuestion',//顺序题库
+  RandomQuestions: WxApiRoot + 'randomQuestions',//随机题库
+  ShowAnswer: WxApiRoot + 'showAnswer',//顺序题库背题模式
   IndexUrl: WxApiRoot + 'home', //首页数据接口
   GetMsgNumber: WxApiRoot + 'sysmsg/getNum', //获取消息数
   GetMsgList: WxApiRoot + 'sysmsg/getAllMsg', //获取消息列

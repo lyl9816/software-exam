@@ -22,7 +22,7 @@ Page({
       id: 4,
       name: '葡萄',
     }],
-    current: '苹果',
+    current2: '',
     position: 'left',
     // 答案解析data
     name: 'name1',
@@ -35,23 +35,23 @@ Page({
     current: 'tab1',
     current_scroll: 'tab1',
     showRight1: false,
-
-    total: 75,
     touchS: [0, 0],
     touchE: [0, 0],
     errormessage:"",
     order: [],
     count:1,
     levelName: '初级',
+    flag:false,
+    right:0,
+    error:0,
+    pagenum:[],
+    currents:[],//选过的选项，
+    sort:""
+
     },
   
 
-  // add:function(e){
-  //   var $id = e.currentTarget.dataset.id;
-  //   console.log($id)
-  //   console.log("aaaaa")
-  //   this.data.num++;
-  // },
+
   toggleRight1() {
     this.setData({
       showRight1: !this.data.showRight1
@@ -60,31 +60,75 @@ Page({
   // 选项选择事件
   handleFruitChange({ detail = {} }) {
     this.setData({
-      current: detail.value
+      current2: detail.value
     });
+    for (var i = 0; i < this.data.order[this.data.count - 1].choices.length; ++i) {
+      if (this.data.order[this.data.count - 1].choices[i].content===this.data.current2){
+       
+        if (this.data.order[this.data.count - 1].choices[i].status===1){
+          this.setData({
+              flag: true,
+             });
+            }else{
+           this.setData({
+              flag: false,
+              });
+              }
+      }
+     
+    }
+
   },
+
   handleChange({ detail }) {
     this.setData({
       current: detail.key
     });
+    if(this.data.current==='tab1'){
+      this.orderquestion();
+    }else{
+      console
+      this.showAnswer();
+    }
   },
   //收藏
   handleCollection() {
-    let isCollected = !this.data.isCollected
+
+    let isCollected = !this.data.order[this.data.count - 1].collection;
     this.setData({
       // 下面本来是这样子的:isCollected=isCollected,可以简写
       isCollected
     })
-    //提示用户
+    
     wx.showToast({
       title: isCollected ? '收藏成功' : '取消收藏',
       icon: 'success'
     })
+    if(isCollected){
+      this.collection();
+    }else{
+      this.cancelCollection();
+    }
   }, 
-  // 页面滑动
-//   wx.switchTab({
-//   url: 'pages/collection/collection'
-// })
+//收藏
+collection:function(){
+  let that=this;
+  var index=this.data.count
+   var qid= this.data.order[index-1].qid
+  let userInfo = wx.getStorageSync('userInfo');
+  console.log(userInfo.nickName);
+  util.request(api.CollectionQuestions, { qid: qid, nickName: userInfo.nickName}).then(function(res){
+  });
+},
+//取消收藏
+  cancelCollection:function(){
+      let that=this;
+    var index = this.data.count
+    var qid = this.data.order[index - 1].qid
+    util.request(api.CancelCollection,{qid:qid}).then(function(res){
+
+    });
+  },
   touchStart: function (e) {
     // console.log(e.touches[0].pageX)
     let sx = e.touches[0].pageX
@@ -106,21 +150,46 @@ Page({
     if (start[0] < end[0] - 30) {
          wx.setStorageSync("counta", that.data.count-1);
       console.log('右滑')//上一题
+      
       this.onLoad();
 
     
     } else if (start[0] > end[0] + 30) {
        wx.setStorageSync("counta", that.data.count+1);
       console.log('左滑')//下一题
+      // 对错题数
+      if (that.data.flag) {
+          that.setData({
+            right: that.data.right + 1,           
+          });
+          } else {
+          that.setData({
+          error: that.data.error + 1
+          });
+      }
       this.onLoad();
-    
-      
+
     } else {
       console.log('静止')
     }
   },
- 
+  //做过的题目号解析显示
+ problem:function(){
+   for (var i = 0; i < this.data.pagenum.length - 1; i++) {
+     if (pagenum[i] == this.data.count) {
+       this.setData({
+         current2:"1"
+       })
+     } else {
+       this.setData({
+         current2:""
+       })
+     }
+   }
+ },
+//  顺序题库答题模式
  orderquestion:function(){
+ 
    let that=this;
 
   util.request(api.Orderquestion,{levelName:that.data.levelName}).then(function (res) {
@@ -129,32 +198,99 @@ Page({
          errormessage:res.errmsg
        });
      } else {
-        // console.log(res.data)
         that.setData({
-          order:res.data
+          order:res.data,
         });
-        console.log(that.data.order)
+    console.log(that.data.order)
+       console.log(that.data.total)
      }
+
    })
  },
+  //  随机题库答题模式
+  randomQuestion: function () {
+
+    let that = this;
+
+    util.request(api.RandomQuestions, { levelName: that.data.levelName }).then(function (res) {
+      if (res.errno === -1) {
+        that.setData({
+          errormessage: res.errmsg
+        });
+      } else {
+        that.setData({
+          order: res.data,
+        });
+        console.log(that.data.order)
+      }
+
+    })
+  },
+//  顺序题库背题模式
+  showAnswer:function(){
+  let that = this;
+
+  util.request(api.ShowAnswer, { levelName: that.data.levelName }).then(function (res) {
+    if (res.errno === -1) {
+      that.setData({
+        errormessage: res.errmsg
+      });
+    } else {
+      that.setData({
+        order: res.data
+      });
+    }
+
+  })
+},
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
+  onLoad: function (e) {
+    if(e!=null){
+    this.setData({
+      sort:e.sort
+    })
+    console.log("+==========="+this.data.sort)
+    }
     var counta = wx.getStorageSync("counta");
     console.log(counta)
     if(counta){
     this.setData({
-      count:counta
+      count:counta,
      });
     }
-   console.log(this.data.count)
+    if(this.data.order.length!=0){
+      this.setData({
+        isCollected: this.data.order[this.data.count - 1].collection,
+        });
+    }
+   
+    
+  // console.log(this.data.count)
     var levelName = wx.getStorageSync('levelName');
     this.setData({
       levelName:levelName
     });
-    this.orderquestion();
-    // console.log(this.data.order);
+    //顺序题库
+    if(e!=null&&e.sort==2){
+    if(this.data.order.length==0){
+      this.orderquestion();
+      }
+    }
+    //随机题库
+    if (e != null &&e.sort == 1) {
+      if (this.data.order.length == 0) {
+        this.randomQuestion();
+      }
+    }
+
+    if(this.data.current2){
+      this.setData({
+        current2:""
+      });
+    }
+ 
    },
 
 
@@ -163,6 +299,11 @@ Page({
    */
   onShow: function () {
    
+   
+   
+  },
+  onReady: function () {
+  
   },
 
   /**
@@ -177,6 +318,17 @@ Page({
    */
   onUnload: function () {
     wx.removeStorageSync("counta");
+    this.setData({
+      flag: false,
+      right:0,
+      error:0,
+      current2:"",
+      pagenum:[],
+      count:1,
+      currents: [],
+     
+    });
+   // console.log(this.data.current)
   },
 
   /**
