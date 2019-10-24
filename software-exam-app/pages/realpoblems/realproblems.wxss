@@ -51,3 +51,13 @@
 .textcolor{
   color: red
 }
+.choose{
+  width: 60rpx;
+  height: 60rpx;
+  background-color:blue;
+  border-radius:25px;
+}
+.isright{
+  margin-top: 10px;
+  color: green;
+}

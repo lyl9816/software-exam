@@ -7,6 +7,8 @@ public class RealQuestionDto {
 
     private Integer pid;//套卷id
 
+    private Integer rpid;//套卷id
+
     private String name;//套卷名字
 
     private String title;//题目
@@ -59,5 +61,13 @@ public class RealQuestionDto {
 
     public void setLid(Integer lid) {
         this.lid = lid;
+    }
+
+    public Integer getRpid() {
+        return rpid;
+    }
+
+    public void setRpid(Integer rpid) {
+        this.rpid = rpid;
     }
 }

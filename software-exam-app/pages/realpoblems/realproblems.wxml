@@ -19,8 +19,8 @@
     <view class='btn'  bindtouchstart='touchStart' bindtouchmove='touchMove' bindtouchend='touchEnd'>{{questions[count-1].title}}</view>
 </view>
 
-<!-- 选项： -->
-<view>
+<!-- 答题模式选项： -->
+<view wx:if="{{current==='tab1'}}">
 <i-panel title="group-水果">
     <i-radio-group current="{{current2}}" bindchange="handleFruitChange">
         <i-radio  wx:for="{{questions[count-1].choices}}" position="{{position}}" wx:key="{{item.id}}" value="{{item.content}}" >
@@ -33,6 +33,8 @@
     </view>
   </view>
 </view>
+<!-- 背题模式选项： -->
+<view wx:if="{{current==='tab2'}}" class="isright">正确答案：{{rchoice}}</view>
 <!-- 页面左右滑动 -->
 <view class='btn'  bindtouchstart='touchStart' bindtouchmove='touchMove' bindtouchend='touchEnd'>
 <!-- 答案解析： -->
@@ -79,7 +81,9 @@
     <view  class="testbox">
     <view  class="box_item fl" wx:for="{{total}}" wx:key="index" >
     
-    <view class="back" bindtap="choiceTid">{{index+1}}</view>
+    <view class="back"  wx:if="{{index+1!=count}}">{{index+1}}</view>
+     <view  wx:if="{{index+1==count}}"  class="choose">{{index+1}}</view>
+
        
     </view>
    </view>

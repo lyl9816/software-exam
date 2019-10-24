@@ -193,4 +193,8 @@ where r.pid=p.id AND r.qid=q.id
 AND r.pid = #{id,jdbcType=INTEGER}
 AND q.lid=#{levelId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectRqidByQid" resultType="integer" parameterType="integer">
+    SELECT id FROM `real_questions` WHERE qid= #{qid,jdbcType=INTEGER}
+  </select>
 </mapper>

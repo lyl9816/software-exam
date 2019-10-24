@@ -43,9 +43,9 @@ public class PaperController {
         int levelId=LevelNameUtil.level(levelName);
         //根据套卷id查题目
         List<RealChoicesDto> allQuestions=paperService.selectRealQuestions(id,levelId);
-        log.info("11111111111111"+allQuestions.get(0).getTitle());
-        log.info("22222222222222"+allQuestions.get(0).getChoices().get(0).getContent());
-        log.info("3333333333333"+allQuestions.get(0).getChoices().get(0).getStatus());
+        //log.info("11111111111111"+allQuestions.get(0).getTitle());
+        //log.info("22222222222222"+allQuestions.get(0).getChoices().get(0).getContent());
+        //log.info("3333333333333"+allQuestions.get(0).getChoices().get(0).getStatus());
         Map<String,Object> map=new HashMap<>();
         map.put("allQuestions",allQuestions);
         return ResponseUtil.ok(map);

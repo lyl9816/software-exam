@@ -40,7 +40,7 @@ Page({
 
     isright:[],//答对的题目
     iswrong:[],//答错的题目
-    
+    rchoice:'',//背题答案
 
   },
   toggleRight1() {
@@ -84,10 +84,17 @@ Page({
     console.log('isright[]:'+this.data.isright.length)
     console.log('iswrong[]:' + this.data.iswrong.length)
   },
+  //答题/背题
   handleChange({ detail }) {
     this.setData({
       current: detail.key
     });
+    console.log("答题/背题："+this.data.current)
+    if(this.data.current==="tab1"){
+      this.getDetils()
+    } else if (this.data.current === "tab2"){
+      this.getRead()
+    }
   },
   //收藏
   handleCollection() {
@@ -127,19 +134,22 @@ Page({
     if (start[0] < end[0] - 30) {
       wx.setStorageSync("counta", that.data.count - 1);
       console.log('右滑')//上一题
+      this.getRead();
       this.onLoad();
 
     } else if (start[0] > end[0] + 30) {
       wx.setStorageSync("counta", that.data.count + 1);
       console.log('左滑')//下一题
+      this.getRead();
       this.onLoad();
+      
 
     } else {
       console.log('静止')
     }
   },
 
-  //获取真题
+  //获取答题模式真题
   getDetils:function(){
     var id=wx.getStorageSync("id");
     let that=this;
@@ -157,10 +167,18 @@ Page({
       }
     })
   },
-  //选择题号跳转
-  choiceTid: function (){
-   
-    console.log("index:" + this.data.index)
+//背题模式
+  getRead:function(){
+    console.log("I am beiti");
+    for (var i = 0; i < this.data.questions[this.data.count - 1].choices.length; i++) {
+
+        if (this.data.questions[this.data.count - 1].choices[i].status == 1) {
+          this.setData({
+            rchoice: this.data.questions[this.data.count - 1].choices[i].content
+          })
+        }
+    }
+    console.log("rchoice" + this.data.rchoice)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -174,12 +192,21 @@ Page({
         count: counta,
       });
     }
+    //清空下一页选项
+    if(this.data.current2){
+      this.setData({
+        current2:''
+      });
+    }
+    //只随机查询选项一次
+    if(this.data.questions.length==0){
+      this.getDetils();   
+    }
     // var that = this;
     // that.setData({
     //   id: options.id
     // })
-     this.getDetils();
-      this.choiceTid();
+     
   },
 
   /**
@@ -208,6 +235,9 @@ Page({
    */
   onUnload: function () {
      wx.removeStorageSync("counta");
+     this.setData({
+       rchoice:''
+     })
   },
 
   /**

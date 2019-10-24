@@ -53,7 +53,8 @@ Page({
 
   goToDetail:function(e){
     var idt = e.currentTarget.dataset.id;
-    wx.setStorageSync("id", idt)
+    wx.setStorageSync("id", idt);
+    console.log("pid:"+e.currentTarget.dataset.id)
     wx.navigateTo({
       url: "/pages/realpoblems/realproblems" 
     })

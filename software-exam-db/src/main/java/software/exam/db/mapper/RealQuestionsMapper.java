@@ -30,4 +30,6 @@ public interface RealQuestionsMapper {
     int updateByPrimaryKey(RealQuestions record);
     //获取套卷题目
     List<RealQuestionDto> seleteRealQuestions(Integer id,Integer levelId);
+    //根据qid找rqid
+    int selectRqidByQid(Integer qid) ;
 }
