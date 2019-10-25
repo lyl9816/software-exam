@@ -23,9 +23,12 @@ App({
     }).catch(() => {
       this.globalData.hasLogin = false;
     });
+
+    wx.setStorageSync("timer",this.globalData.targetTime);
   },
   globalData: {
-    hasLogin: false
+    hasLogin: false,
+    targetTime: new Date().getTime() + 7200000
   }
 
 })

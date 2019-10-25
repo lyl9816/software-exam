@@ -1,0 +1,38 @@
+/* pages/score/score.wxss */
+.circle{
+   overflow:hidden;  
+  display: block;  
+  width: 300rpx;  
+  height: 300rpx;  
+  margin: 20rpx;  
+  margin-top: 10%;  
+  margin-left: 28%;
+  border-radius: 50%;  
+  border: 2px solid #b598a1;  
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);  
+   text-align: center;
+}
+.font{
+  font-size:50px;
+  color: #951c48;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  
+  
+ 
+}
+.score
+{
+  
+  font-size:15px;
+  color: #951c48;
+  text-align: center;
+   margin-left: 39%;
+  
+
+}
+page{
+  background: #fff;
+}

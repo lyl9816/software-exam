@@ -1,0 +1,16 @@
+<!--pages/score/score.wxml-->
+<i-grid>
+    <i-grid-item>
+       
+        <i-grid-icon class="circle" bindtap="goCollectionproblems">
+           <text class="font" color="#381924">{{score}}</text>
+        </i-grid-icon>
+
+         <text class="score" color="#381924">您的成绩</text>
+    </i-grid-item>
+</i-grid>
+<view catchtap="backHome">
+  <i-divider content="点击返回首页" color="#381924" lineColor="#381924"></i-divider>
+</view>
+
+

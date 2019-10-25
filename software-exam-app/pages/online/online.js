@@ -1,4 +1,8 @@
 // pages/online/online.js
+var util = require('../../utils/util.js');
+var api = require('../../config/api.js');
+const { $Message } = require('../../dist/base/index');
+var app = getApp();
 Page({
 
   /**
@@ -6,20 +10,8 @@ Page({
    */
   data: {
     // 选项：
-    fruit: [{
-      id: 1,
-      name: '香蕉',
-    }, {
-      id: 2,
-      name: '苹果'
-    }, {
-      id: 3,
-      name: '西瓜'
-    }, {
-      id: 4,
-      name: '葡萄',
-    }],
-    current: '苹果',
+
+    current: '',
     position: 'left',
     // 答案解析data
     name: 'name1',
@@ -28,18 +20,64 @@ Page({
     index: null,
     // 是否收藏
     isCollected: false,
+    //页面方位
+    touchS: [0, 0],
+    touchE: [0, 0],
+    errormessage: "",
 
-    //倒计时
-    targetTime: 0,
-    clearTimer: false,
-    total:75
+    //右侧题目条数
+    total: 75,
+    //题目List
+    questions: [],
+    levelName: '初级',
+    count: 1,
+    flag: false,
+    //答对题号
+    rightChoice: [],
+    //答错题号
+    wrongChoice: [],
+    ttime: 0,
+
+
+
   },
   // 选项选择事件
-  handleFruitChange({ detail = {} }) {
+  handleChange({ detail = {} }) {
     this.setData({
       current: detail.value
     });
+    for (var i = 0; i < this.data.questions[this.data.count - 1].choices.length; i++) {
+      if (this.data.questions[this.data.count - 1].choices[i].content === this.data.current) {
+        if (this.data.questions[this.data.count - 1].choices[i].status === 1) {//答对题目
+          //答对题目存入数组
+          let righttemp = this.data.rightChoice;
+          var rr = i + 1;
+          righttemp.push(rr);
+          this.setData({
+            flag: true,
+            rightChoice: righttemp,
+          });
+          console.log(this.data.rightChoice);
+
+        } else {//答错题目
+          //答错题目存入数组
+          let wrongtemp = this.data.wrongChoice;
+          var ww = i + 1;
+          wrongtemp.push(ww);
+          this.setData({
+            flag: false,
+            wrongChoice: wrongtemp,
+          });
+
+        }
+      }
+    }
+
+
+
+
   },
+
   //抽屉
   toggleRight1() {
     this.setData({
@@ -59,14 +97,139 @@ Page({
       icon: 'success'
     })
   },
+  //页面滑动切换
+  touchStart: function (e) {
+    // console.log(e.touches[0].pageX)
+    let sx = e.touches[0].pageX
+    let sy = e.touches[0].pageY
+    this.data.touchS = [sx, sy]
+  },
+  touchMove: function (e) {
+    let sx = e.touches[0].pageX;
+    let sy = e.touches[0].pageY;
+    this.data.touchE = [sx, sy]
+  },
+  touchEnd: function (e) {
+    let start = this.data.touchS
+    let end = this.data.touchE
+    let that = this
+    // console.log(start)
+    // console.log(end)
+
+    if (start[0] < end[0] - 30) {
+      wx.setStorageSync("counta", that.data.count - 1);
+      console.log('右滑')//上一题
+      var countr = wx.getStorageSync("counta");
+      if (countr <= this.data.questions.length) {
+        this.onLoad();
+
+      }
+      if (countr <= 1) {
+        wx.showToast({
+          title: '已经是第一题啦！',
+        })
+      }
+
+
+
+    } else if (start[0] > end[0] + 30) {
+      wx.setStorageSync("counta", that.data.count + 1);
+      console.log('左滑')//下一题
+      var countw = wx.getStorageSync("counta");
+
+      if (countw <= this.data.questions.length) {
+        this.onLoad();
+      }
+      if (countw > this.data.questions.length) {
+        wx.showToast({
+          title: '已经是最后一题！',
+        })
+      }
+
+
+    } else {
+      console.log('静止')
+    }
+  },
+
+  //显示问题和答案
+  showquestions: function () {
+    let that = this;
+    util.request(api.OnlinePaper, { levelName: that.data.levelName }).then(function (res) {
+      if (res.errno === -1) {
+        that.setData({
+          errormessage: res.errmsg
+        });
+      } else {
+        that.setData({
+          questions: res.data
+        });
+        console.log(that.data.questions);
+
+      }
+    })
+  },
+  /**
+   * 提交试卷
+   */
+  commitPaper: function () {
+    wx.setStorageSync("timer", new Date().getTime() + 7200000)
+    console.log("================");
+    console.log(wx.getStorageSync("timer"));
+    var counti = wx.getStorageSync("counta");
+    if (counti > this.data.questions.length) {
+      var score = this.data.rightChoice.length;
+      console.log(score);
+      wx.navigateTo({
+        url: '/pages/score/score?score=' + score,
+      })
+    } else {
+      wx.showToast({
+        title: '还没有答完题！',
+      })
+    }
+
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // this.setData({
+    //   targetTime: new Date().getTime() + 7200000,
+
+
+    // });
+    let that = this;
+    that.setData({
+      ttime: wx.getStorageSync("timer")
+    })
+
+
+    var counta = wx.getStorageSync("counta");
+
+    if (counta) {
+      this.setData({
+        count: counta,
+
+      });
+    }
+
+    console.log(this.data.count)
+    var levelName = wx.getStorageSync('levelName');
     this.setData({
-      targetTime: new Date().getTime() + 7200000,
-    
+      levelName: levelName
     });
+    // console.log(this.data.levelName);
+    //若question数组为空，才请求后台数据库数据存入
+    if (this.data.questions.length == 0) {
+      this.showquestions();
+    }
+
+
+
+
+
   },
 
   /**
@@ -97,6 +260,7 @@ Page({
     this.setData({
       clearTimer: true
     });
+    wx.removeStorageSync("counta");
   },
 
   /**
@@ -119,12 +283,5 @@ Page({
   onShareAppMessage: function () {
 
   },
-  /**
-   * 倒计时
-   */
-  myLinsterner(e) {
-    this.setData({
-      status: '结束'
-    });
-  }
+
 })
