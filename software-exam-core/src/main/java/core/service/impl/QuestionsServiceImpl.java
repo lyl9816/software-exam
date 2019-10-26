@@ -31,7 +31,7 @@ public class QuestionsServiceImpl implements QuestionsService {
      * @return
      */
     @Override
-    public List<QuestionsDto> findAll(int level) {
+    public List<QuestionsDto> findAll(int level,int uid) {
         List<Choices> choices=null;
         List<QuestionsDto> questionsDtos = questionsMapper.selectAnalyze(level);
 
@@ -40,7 +40,7 @@ public class QuestionsServiceImpl implements QuestionsService {
             Integer id = questions1.getId();
             if (id!=null){
                 choices = choicesMapper.randChoiceById(id);
-                Collection collection = collectionMapper.selectByQid(id);
+                Collection collection = collectionMapper.selectByQid(id,uid);
                 if (collection!=null){
                         questions1.setCollection(true);
                 }else{
@@ -57,8 +57,19 @@ public class QuestionsServiceImpl implements QuestionsService {
      * @return
      */
     @Override
-    public List<QuestionsDto> findAnswerByLevel(int level) {
+    public List<QuestionsDto> findAnswerByLevel(int level,int uid) {
         List<QuestionsDto> questionsDtos = questionsMapper.selectAnswerByLevel(level);
+        for (QuestionsDto questionsDto:questionsDtos){
+            Integer id = questionsDto.getId();
+            if (id!=null){
+                Collection collection = collectionMapper.selectByQid(id,uid);
+                if (collection!=null){
+                    questionsDto.setCollection(true);
+                }else{
+                    questionsDto.setCollection(false);
+                }
+            }
+        }
         return questionsDtos;
     }
     /**
@@ -67,7 +78,7 @@ public class QuestionsServiceImpl implements QuestionsService {
      * @return
      */
     @Override
-    public List<QuestionsDto> randomSelect(int level) {
+    public List<QuestionsDto> randomSelect(int level,int uid) {
         List<QuestionsDto> questionsDtos = questionsMapper.selectRandom(level);
         for(QuestionsDto questionsDto:questionsDtos){
             Integer id = questionsDto.getId();
@@ -75,7 +86,7 @@ public class QuestionsServiceImpl implements QuestionsService {
                 List<Choices> choices = choicesMapper.randChoiceById(id);
                 questionsDto.setChoices(choices);
 
-                Collection collection = collectionMapper.selectByQid(id);
+                Collection collection = collectionMapper.selectByQid(id,uid);
                 if (collection!=null){
                     questionsDto.setCollection(true);
                 }else{

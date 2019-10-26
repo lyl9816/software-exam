@@ -11,19 +11,19 @@ public interface QuestionsService {
      * @param level
      * @return
      */
-    List<QuestionsDto> findAll(int level);
+    List<QuestionsDto> findAll(int level,int  uid);
 
     /**
      * 按分类获取题目，正确答案，科目
      * @param level
      * @return
      */
-    List<QuestionsDto> findAnswerByLevel(int level);
+    List<QuestionsDto> findAnswerByLevel(int level,int uid);
 
     /**
      * 随机按分类获取题目，正确答案，科目
      * @param level
      * @return
      */
-    List<QuestionsDto> randomSelect(int level);
+    List<QuestionsDto> randomSelect(int level,int uid);
 }

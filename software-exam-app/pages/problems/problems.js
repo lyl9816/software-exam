@@ -131,7 +131,6 @@ collection:function(){
   var index=this.data.count
    var qid= this.data.order[index-1].qid
   let userInfo = wx.getStorageSync('userInfo');
-  //console.log(userInfo.nickName);
   util.request(api.CollectionQuestions, { qid: qid, nickName: userInfo.nickName}).then(function(res){
   });
 },
@@ -140,7 +139,8 @@ collection:function(){
       let that=this;
     var index = this.data.count
     var qid = this.data.order[index - 1].qid
-    util.request(api.CancelCollection,{qid:qid}).then(function(res){
+    let userInfo = wx.getStorageSync('userInfo');
+    util.request(api.CancelCollection, { qid: qid,nickName: userInfo.nickName}).then(function(res){
 
     });
   },
@@ -240,8 +240,8 @@ collection:function(){
  orderquestion:function(){
  
    let that=this;
-
-  util.request(api.Orderquestion,{levelName:that.data.levelName}).then(function (res) {
+   let userInfo = wx.getStorageSync('userInfo');
+  util.request(api.Orderquestion,{levelName:that.data.levelName,nickName:userInfo.nickName}).then(function (res) {
      if (res.errno===-1){
        that.setData({
          errormessage:res.errmsg
@@ -272,8 +272,8 @@ collection:function(){
   randomQuestion: function () {
 
     let that = this;
-
-    util.request(api.RandomQuestions, { levelName: that.data.levelName }).then(function (res) {
+    let userInfo = wx.getStorageSync('userInfo');
+    util.request(api.RandomQuestions, { levelName: that.data.levelName,nickName:userInfo.nickName }).then(function (res) {
       if (res.errno === -1) {
         that.setData({
           errormessage: res.errmsg
@@ -290,8 +290,8 @@ collection:function(){
 //  顺序题库背题模式
   showAnswer:function(){
   let that = this;
-
-  util.request(api.ShowAnswer, { levelName: that.data.levelName }).then(function (res) {
+    let userInfo = wx.getStorageSync('userInfo');
+  util.request(api.ShowAnswer, { levelName: that.data.levelName,nickName:userInfo.nickName }).then(function (res) {
     if (res.errno === -1) {
       that.setData({
         errormessage: res.errmsg

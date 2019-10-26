@@ -25,10 +25,11 @@ public class WrongController {
     public Object wrongQuestions(int qid,String nickName){
         User user = userService.selectByNickName(nickName);
         System.out.println(user);
+        Integer id = user.getId();
         WrongQuestions wrongQuestions=new WrongQuestions();
         wrongQuestions.setQid(qid);
         wrongQuestions.setUid(user.getId());
-        int i = wrongService.add(wrongQuestions);
+        int i = wrongService.add(wrongQuestions,id);
         if (i>0){
             return ResponseUtil.ok();
         }

@@ -7,11 +7,11 @@ public interface CollectionService {
      * 添加收藏
      * @param collection
      */
-   int add(Collection collection);
+   int add(Collection collection,int id);
 
     /**
      * 取消收藏
      * @param qid
      */
-    int cancelCollection(int qid);
+    int cancelCollection(int qid,int id);
 }

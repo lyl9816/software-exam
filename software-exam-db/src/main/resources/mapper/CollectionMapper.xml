@@ -178,6 +178,6 @@
   </update>
 <!--  根据题目id获取-->
 <select id="selectByQid" resultMap="BaseResultMap" parameterType="int">
-  select * from collection where qid=#{qid,jdbcType=INTEGER}
+  select * from collection where qid=#{qid,jdbcType=INTEGER} and uid=#{uid,jdbcType=INTEGER}
 </select>
 </mapper>

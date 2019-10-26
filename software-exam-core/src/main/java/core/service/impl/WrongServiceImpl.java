@@ -17,7 +17,7 @@ public class WrongServiceImpl  implements WrongService {
      * @param wrongQuestions
      */
     @Override
-    public int add(WrongQuestions wrongQuestions) {
+    public int add(WrongQuestions wrongQuestions,int uid) {
         int i=0;
         boolean flag=true;
         WrongQuestionsExample example=new WrongQuestionsExample();
@@ -26,7 +26,7 @@ public class WrongServiceImpl  implements WrongService {
         List<WrongQuestions> wrongQuestions1 = wrongQuestionsMapper.selectByExample(example);
         for (WrongQuestions wrongQuestions2:wrongQuestions1){
             Integer qid = wrongQuestions2.getQid();
-            if (wrongQuestions.getQid()==qid){
+            if (wrongQuestions.getQid()==qid&&wrongQuestions.getUid()==uid){
                 i=1;
                 flag=false;
                 break;

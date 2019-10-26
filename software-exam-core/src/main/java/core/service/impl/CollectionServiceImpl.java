@@ -18,7 +18,7 @@ public class CollectionServiceImpl implements CollectionService {
      * @param collection
      */
     @Override
-    public int add(Collection collection) {
+    public int add(Collection collection,int uid) {
         int insert=0;
         boolean flag=true;
         CollectionExample collectionExample=new CollectionExample();
@@ -27,7 +27,7 @@ public class CollectionServiceImpl implements CollectionService {
         List<Collection> collections = collectionMapper.selectByExample(collectionExample);
         for (Collection collection1:collections){
             Integer qid = collection1.getQid();
-            if (collection.getQid()==qid){
+            if (collection.getQid()==qid&&collection.getUid()==uid){
                 insert=1;
                 flag=false;
                 break;
@@ -46,10 +46,11 @@ public class CollectionServiceImpl implements CollectionService {
      * @param qid
      */
     @Override
-    public int cancelCollection(int qid) {
+    public int cancelCollection(int qid,int uid) {
         CollectionExample collectionExample=new CollectionExample();
         CollectionExample.Criteria criteria=collectionExample.createCriteria();
         criteria.andQidEqualTo(qid);
+        criteria.andUidEqualTo(uid);
         int i = collectionMapper.deleteByExample(collectionExample);
         return i;
     }

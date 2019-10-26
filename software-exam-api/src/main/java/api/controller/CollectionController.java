@@ -27,10 +27,11 @@ public class CollectionController {
     public Object collection(int qid,String nickName){
         User user = userService.selectByNickName(nickName);
         System.out.println(user);
-         Collection collection=new Collection();
+        Integer id = user.getId();
+        Collection collection=new Collection();
         collection.setUid(user.getId());
         collection.setQid(qid);
-        int add = collectionService.add(collection);
+        int add = collectionService.add(collection,id);
         if (add>0){
             return ResponseUtil.ok();
         }
@@ -43,8 +44,11 @@ public class CollectionController {
      * @return
      */
     @GetMapping("/cancelCollection")
-    public Object cancelCollection(int qid){
-        int i = collectionService.cancelCollection(qid);
+    public Object cancelCollection(int qid,String nickName){
+        User user = userService.selectByNickName(nickName);
+        System.out.println(user);
+        Integer id = user.getId();
+        int i = collectionService.cancelCollection(qid,id);
         if (i>0){
             return ResponseUtil.ok();
         }
