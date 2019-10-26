@@ -3,11 +3,9 @@ package core.service.impl;
 import core.service.OnlineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import software.exam.db.domain.Choices;
-import software.exam.db.domain.ChoicesExample;
-import software.exam.db.domain.Questions;
-import software.exam.db.domain.QuestionsExample;
+import software.exam.db.domain.*;
 import software.exam.db.mapper.ChoicesMapper;
+import software.exam.db.mapper.CollectionMapper;
 import software.exam.db.mapper.QuestionsMapper;
 import software.exam.db.model.dto.OnlineDto;
 
@@ -20,6 +18,9 @@ public class OnlineServiceImpl implements OnlineService {
 
     @Autowired
     private ChoicesMapper choicesMapper;
+
+    @Autowired
+    private CollectionMapper collectionMapper;
 
     /**
      * 根据等级id获取随机的75条题目和答案
@@ -37,8 +38,16 @@ public class OnlineServiceImpl implements OnlineService {
 
     @Override
     public List<Choices> bornChoicesByQid(int qid) {
+
         List<Choices> choices = choicesMapper.randChoiceById(qid);
+
         return choices;
+    }
+
+    @Override
+    public Collection findifCollections(int qid,int uid) {
+        Collection collection = collectionMapper.selectByQid(qid,uid);
+        return collection;
     }
 
 

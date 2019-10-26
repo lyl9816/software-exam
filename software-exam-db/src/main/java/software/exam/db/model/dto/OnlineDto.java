@@ -21,6 +21,8 @@ public class OnlineDto {
     private String name;
     //解析
     private String detail;
+    //是否收藏
+    private boolean collection;
 
 
 

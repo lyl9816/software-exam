@@ -50,10 +50,10 @@
 <!-- 交卷 -->
 <image style="width:30px;height:30px;" src="/static/images/submit.png" catchtap="commitPaper"></image>
 <!-- 收藏 -->
-   <image class="left" style="width:30px;height:30px" catchtap='handleCollection'  wx:if="{{!isCollected}}" src="/static/images/star.png"></image>
-<image  class="left" catchtap='handleCollection' wx:if="{{isCollected}}" src="/static/images/star_selected.png" style="width:30px;height:30px" ></image>
-
-  <image class="left" style="width:25px;height:25px" catchtap='toggleRight1'  wx:if="{{!isCollected}}" src="/static/images/num_all.png"></image>
+   <image class="left" style="width:30px;height:30px" catchtap='handleCollection'  wx:if="{{isCollected==false}}" src="/static/images/star.png"></image>
+<image  class="left" catchtap='handleCollection' wx:if="{{isCollected==true}}" src="/static/images/star_selected.png" style="width:30px;height:30px" ></image>
+<!-- 显示全部题目 -->
+  <image class="left" style="width:25px;height:25px" catchtap='toggleRight1' src="/static/images/num_all.png"></image>
    
 
   <i-drawer mode="right" visible="{{showRight1}}" bind:close="toggleRight1">
@@ -62,9 +62,10 @@
    <scroll-view scroll-y="true" style="height: 300px">
    
     <view  class="testbox">
-    <view  class="box_item fl" wx:for="{{total}}" wx:key="index">
+    <view  class="box_item fl" wx:for="{{questions.length}}" wx:key="index">
 
-    <view class="back">{{index+1}}</view>
+    <view class="back" wx:if="{{index+1!=count}}">{{index+1}}</view>
+    <view  wx:if="{{index+1==count}}" class="right">{{index+1}}</view>
        
     </view>
    </view>

@@ -20,6 +20,8 @@ Page({
     index: null,
     // 是否收藏
     isCollected: false,
+
+    showRight1: false,
     //页面方位
     touchS: [0, 0],
     touchE: [0, 0],
@@ -50,25 +52,23 @@ Page({
       if (this.data.questions[this.data.count - 1].choices[i].content === this.data.current) {
         if (this.data.questions[this.data.count - 1].choices[i].status === 1) {//答对题目
           //答对题目存入数组
-          let righttemp = this.data.rightChoice;
-          var rr = i + 1;
-          righttemp.push(rr);
+          var qqid=this.data.questions[this.data.count-1].qid;
+         this.data.rightChoice.push(qqid);
+        
           this.setData({
             flag: true,
-            rightChoice: righttemp,
           });
-          console.log(this.data.rightChoice);
+
 
         } else {//答错题目
           //答错题目存入数组
-          let wrongtemp = this.data.wrongChoice;
-          var ww = i + 1;
-          wrongtemp.push(ww);
+          var wqid = this.data.questions[this.data.count - 1].qid;
+          this.data.wrongChoice.push(wqid);
           this.setData({
             flag: false,
-            wrongChoice: wrongtemp,
+          
           });
-
+          console.log(this.data.wrongChoice);
         }
       }
     }
@@ -86,7 +86,8 @@ Page({
   },
   //收藏
   handleCollection() {
-    let isCollected = !this.data.isCollected
+    let isCollected = !this.data.questions[this.data.count-1].collection;
+    this.data.questions[this.data.count-1].collection = isCollected;
     this.setData({
       // 下面本来是这样子的:isCollected=isCollected,可以简写
       isCollected
@@ -96,6 +97,32 @@ Page({
       title: isCollected ? '收藏成功' : '取消收藏',
       icon: 'success'
     })
+    if (isCollected) {
+      //收藏
+      this.collection();
+    } else {
+      //取消收藏
+      this.cancelCollection();
+    }
+  },
+  //收藏
+  collection: function () {
+    let that = this;
+    var index = this.data.count
+    var qid = this.data.questions[index - 1].qid;
+    let userInfo = wx.getStorageSync('userInfo');
+    util.request(api.CollectionQuestions, { qid: qid, nickName: userInfo.nickName }).then(function (res) {
+    });
+  },
+  //取消收藏
+  cancelCollection: function () {
+    let that = this;
+    var index = this.data.count
+    var qid = this.data.questions[index - 1].qid
+    let userInfo = wx.getStorageSync('userInfo');
+    util.request(api.CancelCollection, { qid: qid, nickName: userInfo.nickName }).then(function (res) {
+
+    });
   },
   //页面滑动切换
   touchStart: function (e) {
@@ -155,7 +182,8 @@ Page({
   //显示问题和答案
   showquestions: function () {
     let that = this;
-    util.request(api.OnlinePaper, { levelName: that.data.levelName }).then(function (res) {
+    let userInfo = wx.getStorageSync('userInfo');
+    util.request(api.OnlinePaper, { levelName: that.data.levelName, nickName: userInfo.nickName }).then(function (res) {
       if (res.errno === -1) {
         that.setData({
           errormessage: res.errmsg
@@ -214,6 +242,14 @@ Page({
 
       });
     }
+    if(this.data.questions.length!=0)
+    {
+      this.setData({
+        isCollected:this.data.questions[this.data.count-1].collection,
+      });
+   
+    }
+
 
     console.log(this.data.count)
     var levelName = wx.getStorageSync('levelName');

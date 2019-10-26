@@ -44,7 +44,10 @@
   border-radius:25px;
 }
 .right{
+   width: 60rpx;
+  height: 60rpx;
   background-color: #61ac85;
+  border-radius:25px;
 }
 .wrong{
   background-color: #ee3f4d;
