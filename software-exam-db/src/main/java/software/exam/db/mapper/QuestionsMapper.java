@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import software.exam.db.domain.Questions;
 import software.exam.db.domain.QuestionsExample;
+import software.exam.db.model.dto.OnlineDto;
 import software.exam.db.model.dto.QuestionsDto;
 
 public interface QuestionsMapper {
@@ -37,4 +38,8 @@ public interface QuestionsMapper {
     //    根据分类获取题目和对应的科目以及正确答案
     List<QuestionsDto> selectAnswerByLevel(int level);
     List<QuestionsDto> selectRandom(int level);
+
+    //根据题目id获取题目、选项、对应科目以及正确答案(错题库和我的收藏)
+    OnlineDto selectAllByQid(int qid);
+
 }

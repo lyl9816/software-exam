@@ -26,5 +26,8 @@ module.exports = {
   
   //在线考试
   OnlinePaper: WxApiRoot + 'newPaper',//显示试卷
+  FindCollection: WxApiRoot +'findCollection',//显示收藏题目
+  RemoveWrong: WxApiRoot + 'removeWrong',//移除错题
+  FindWrong: WxApiRoot + 'findWrong',//显示错题题目
 
 };

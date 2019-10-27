@@ -1,6 +1,9 @@
 package core.service;
 
 import software.exam.db.domain.Collection;
+import software.exam.db.model.dto.OnlineDto;
+
+import java.util.List;
 
 public interface CollectionService {
     /**
@@ -14,4 +17,12 @@ public interface CollectionService {
      * @param qid
      */
     int cancelCollection(int qid,int id);
+
+    /**
+     * 读取收藏表
+     * @param id
+     * @return
+     */
+    List<OnlineDto> findCollection(int id);
+
 }

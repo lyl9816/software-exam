@@ -18,6 +18,14 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="content" jdbcType="VARCHAR" property="content" />
   </resultMap>
+  <resultMap id="CWResultMap" type="software.exam.db.model.dto.OnlineDto">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="qid" jdbcType="INTEGER" property="qid" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="detail" jdbcType="VARCHAR" property="detail" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -222,4 +230,10 @@
     SELECT q.*,a.*, s.`name` FROM questions q ,`analyze` a,sort_course s
      WHERE lid = 1 and q.id=a.qid and q.cid=s.id ORDER BY RAND()
   </select>
+<!-- 根据题目id获取题目、对应科目以及正确答案(错题库和我的收藏) -->
+  <select id="selectAllByQid" parameterType="java.lang.Integer" resultMap="CWResultMap">
+   SELECT q.*,a.*, s.`name` FROM questions q ,`analyze` a,sort_course s
+     WHERE q.id=#{id,jdbcType=INTEGER} and q.id=a.qid and q.cid=s.id
+  </select>
+
 </mapper>

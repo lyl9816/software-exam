@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import software.exam.db.domain.Collection;
 import software.exam.db.domain.User;
+import software.exam.db.model.dto.OnlineDto;
+
+import java.util.List;
 
 @RestController
 public class CollectionController {
@@ -54,4 +57,25 @@ public class CollectionController {
         }
         return ResponseUtil.fail();
     }
+
+    /**
+     * 读取用户收藏列表
+     * @param nickName
+     * @return
+     */
+    @GetMapping("/findCollection")
+    public Object findCollection(String nickName)
+    {
+        //根据用户姓名获取uid
+        User user = userService.selectByNickName(nickName);
+        Integer id = user.getId();
+        List<OnlineDto> onlineDtoList = collectionService.findCollection(id);
+        if(onlineDtoList.size()<0 && onlineDtoList==null)
+        {
+            return ResponseUtil.fail();
+        }
+        return ResponseUtil.ok(onlineDtoList);
+    }
+
+
 }

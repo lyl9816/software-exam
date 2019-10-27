@@ -1,17 +1,44 @@
 // pages/error/error.js
+var util = require('../../utils/util.js');
+var api = require('../../config/api.js');
+const { $Message } = require('../../dist/base/index');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    order:[],
+  },
+  /**
+   * 显示错题
+   */
+  showWrongQuestions(){
+    let that =this;
+    let userInfo = wx.getStorageSync('userInfo');
+    util.request(api.FindWrong, { nickName: userInfo.nickName }).then(function (res) {
+      if (res.errno === -1) {
+        that.setData({
+          errormessage: res.errmsg
+        });
+      } else {
+        that.setData({
+          order: res.data
+        });
+        console.log(that.data.order);
+      }
+    })
+
 
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //若order数组为空，才请求后台数据
+    if (this.data.order.length == 0) {
+      this.showWrongQuestions();
+    }
 
   },
 

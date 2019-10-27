@@ -68,9 +68,14 @@ Page({
             flag: false,
           
           });
-          console.log(this.data.wrongChoice);
+          // console.log(this.data.wrongChoice);
         }
       }
+    }
+    //错题
+    console.log(this.data.flag)
+    if (this.data.flag == false) {
+      this.wrongQuestions();
     }
 
 
@@ -122,6 +127,15 @@ Page({
     let userInfo = wx.getStorageSync('userInfo');
     util.request(api.CancelCollection, { qid: qid, nickName: userInfo.nickName }).then(function (res) {
 
+    });
+  },
+  //错题
+  wrongQuestions: function () {
+    let that = this;
+    var index = this.data.count
+    var qid = this.data.questions[index - 1].qid
+    let userInfo = wx.getStorageSync('userInfo');
+    util.request(api.WrongQuestions, { qid: qid, nickName: userInfo.nickName }).then(function (res) {
     });
   },
   //页面滑动切换

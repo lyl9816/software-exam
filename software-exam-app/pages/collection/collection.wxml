@@ -2,7 +2,7 @@
 <i-grid>
     <i-grid-item>
         <i-grid-icon class="circle" bindtap="goCollectionproblems">
-           <text class="font" color="#1a6840">88</text>
+           <text class="font" color="#1a6840">{{order.length}}</text>
         </i-grid-icon>
         <i-grid-label>题 数</i-grid-label>
     </i-grid-item>
