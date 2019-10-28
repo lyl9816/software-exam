@@ -131,7 +131,9 @@ problems:function(){
 //答题模式背题模式选择
   handleChange({ detail }) {
     this.setData({
-      current: detail.key
+      current: detail.key,
+      order:this.data.order,
+      count:1
     });
     if (this.data.sort == 2){
     if(this.data.current==='tab1'){
@@ -263,13 +265,14 @@ collection:function(){
   //右滑做过的题显示
   reproblem:function(){
     var f = false;
-    console.log("num" + this.data.choiceArray[0].pageNum)
+    if (this.data.choiceArray.length > 0 && this.data.choiceArray!=null){
     for (var i = 0; i < this.data.choiceArray.length; i++) {
       if (this.data.choiceArray[i].pageNum == this.data.count) {
         f = true;
         break;
       } else {
         f = false;
+      }
       }
     }
     console.log("f"+f)
