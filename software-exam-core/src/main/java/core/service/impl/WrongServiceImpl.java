@@ -48,6 +48,7 @@ public class WrongServiceImpl  implements WrongService {
         if (flag){
             i = wrongQuestionsMapper.insert(wrongQuestions);
         }
+
         return i;
     }
 

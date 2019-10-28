@@ -11,7 +11,7 @@ Page({
   data: {
     // 选项：
 
-    current: '',
+    current2: '',
     position: 'left',
     // 答案解析data
     name: 'name1',
@@ -39,6 +39,11 @@ Page({
     //答错题号
     wrongChoice: [],
     ttime: 0,
+    choice:"",
+    flagchoices:false,
+    problemsArray: [],
+    flagProblems: false,
+    choiceArray: [],//选过的选项
 
 
 
@@ -46,10 +51,11 @@ Page({
   // 选项选择事件
   handleChange({ detail = {} }) {
     this.setData({
-      current: detail.value
+      current2: detail.value,
+      flagchoices: true,
     });
     for (var i = 0; i < this.data.questions[this.data.count - 1].choices.length; i++) {
-      if (this.data.questions[this.data.count - 1].choices[i].content === this.data.current) {
+      if (this.data.questions[this.data.count - 1].choices[i].content === this.data.current2) {
         if (this.data.questions[this.data.count - 1].choices[i].status === 1) {//答对题目
           //答对题目存入数组
           var qqid=this.data.questions[this.data.count-1].qid;
@@ -77,10 +83,32 @@ Page({
     if (this.data.flag == false) {
       this.wrongQuestions();
     }
+    //做过的题
+    this.problems();
 
 
 
-
+  },
+  //做过的题目保存到数组
+  problems: function () {
+    var f = true;
+    for (var i = 0; i < this.data.choiceArray.length; i++) {
+      if (this.data.choiceArray[i] == this.data.count) {
+        f = false;
+        break;
+      } else {
+        f = true;
+      }
+    }
+    if (f) {
+      var num = this.data.choiceArray
+      var str = { "choice": this.data.current2, "flag": this.data.flag, "pageNum": this.data.count }
+      num.push(str)
+      this.setData({
+        choiceArray: num
+      })
+      console.log("array" + this.data.choiceArray[0].pageNum)
+    }
   },
 
   //抽屉
@@ -156,7 +184,7 @@ Page({
     let that = this
     // console.log(start)
     // console.log(end)
-
+    
     if (start[0] < end[0] - 30) {
       wx.setStorageSync("counta", that.data.count - 1);
       console.log('右滑')//上一题
@@ -164,6 +192,16 @@ Page({
       if (countr <= this.data.questions.length) {
         this.onLoad();
 
+      }
+      //显示做过的题
+      if (that.data.choiceArray[that.data.count - 1]) {
+        var j = that.data.count;
+        console.log(that.data.choiceArray[that.data.count - 1].choice)
+        that.setData({
+          current2: that.data.choiceArray[that.data.count - 1].choice,
+          flagchoices: true,
+          flag: that.data.choiceArray[that.data.count - 1].flag
+        })
       }
       if (countr <= 1) {
         wx.showToast({
@@ -174,6 +212,9 @@ Page({
 
 
     } else if (start[0] > end[0] + 30) {
+      this.setData({
+        flagchoices: false
+      });
       wx.setStorageSync("counta", that.data.count + 1);
       console.log('左滑')//下一题
       var countw = wx.getStorageSync("counta");
@@ -186,13 +227,42 @@ Page({
           title: '已经是最后一题！',
         })
       }
-
+      //做过的题显示
+      this.reproblem()
 
     } else {
       console.log('静止')
     }
   },
+  //右滑做过的题显示
+  reproblem: function () {
+    var f = false;
+    if (this.data.choiceArray.length > 0 && this.data.choiceArray != null) {
+    for (var i = 0; i < this.data.choiceArray.length; i++) {
+      if (this.data.choiceArray[i].pageNum == this.data.count) {
+        f = true;
+        break;
+      } else {
+        f = false;
+      }
+    }
+    }
+    console.log("f" + f)
+    if (f) {
+      this.setData({
+        current2: this.data.choiceArray[this.data.count - 1].choice,
+        flagchoices: true,
+        flag: this.data.choiceArray[this.data.count - 1].flag
+      })
+    } else {
 
+      //选项可选
+      this.setData({
+        current2: "",
+        flagchoices: false,
+      })
+    }
+  },
   //显示问题和答案
   showquestions: function () {
     let that = this;
@@ -230,6 +300,20 @@ Page({
         title: '还没有答完题！',
       })
     }
+    wx.removeStorageSync("counta");
+    this.setData({
+      flag: false,
+      current2: "",
+      //答对题号
+      rightChoice: [],
+      //答错题号
+      wrongChoice: [],
+      flagchoices: false,
+      problemsArray: [],
+      flagProblems: false,
+      choiceArray: [],//选过的选项
+    })
+
 
   },
 
@@ -275,7 +359,11 @@ Page({
     if (this.data.questions.length == 0) {
       this.showquestions();
     }
-
+    if (this.data.current2) {
+      this.setData({
+        current2: ""
+      });
+    }
 
 
 
@@ -311,6 +399,19 @@ Page({
       clearTimer: true
     });
     wx.removeStorageSync("counta");
+    wx.removeStorageSync("counta");
+    this.setData({
+      flag: false,
+      current2: "",
+      //答对题号
+      rightChoice: [],
+      //答错题号
+      wrongChoice: [],
+      flagchoices: false,
+      problemsArray: [],
+      flagProblems: false,
+      choiceArray: [],//选过的选项
+    })
   },
 
   /**

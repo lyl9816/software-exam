@@ -52,7 +52,6 @@ public class CollectionServiceImpl implements CollectionService {
         }
         return insert;
     }
-
     /**
      * 取消收藏
      * @param qid
