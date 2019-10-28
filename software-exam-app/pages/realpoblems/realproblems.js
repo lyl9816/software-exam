@@ -12,7 +12,7 @@ Page({
     {id: 1,name: '香蕉',}, 
     {id: 2,name: '苹果'}, 
     {id: 3,name: '西瓜'}, 
-    {id: 4,name: '葡萄',}
+    {id: 4,name: '葡萄'},
     ],
     current2: '',
     position: 'left',
@@ -59,7 +59,7 @@ Page({
       if (this.data.questions[this.data.count - 1].choices[i].content===this.data.current2){
         if (this.data.questions[this.data.count - 1].choices[i].status===1){//答对题目
           //答对题目存入数组
-          let righttemp = this.data.isright
+          let righttemp = this.data.isright//*******存的是选项id */
           var rr = i + 1;
           righttemp.push(rr)
             this.setData({
@@ -76,13 +76,15 @@ Page({
             flag: false,
             iswrong: wrongtemp,
           })
-         
           }
         }
     }
     console.log("flag:"+this.data.flag)
     console.log('isright[]:'+this.data.isright.length)
     console.log('iswrong[]:' + this.data.iswrong.length)
+    if (this.data.flag == false) {
+      this.wrongQuestions();
+    }
   },
   //答题/背题
   handleChange({ detail }) {
@@ -96,9 +98,10 @@ Page({
       this.getRead()
     }
   },
-  //收藏
+  //收藏图案
   handleCollection() {
-    let isCollected = !this.data.isCollected
+    let isCollected = !this.data.questions[this.data.count - 1].iscollection;
+    this.data.questions[this.data.count - 1].iscollection = isCollected;
     this.setData({
       // 下面本来是这样子的:isCollected=isCollected,可以简写
       isCollected
@@ -108,6 +111,30 @@ Page({
       title: isCollected ? '收藏成功' : '取消收藏',
       icon: 'success'
     })
+    if (isCollected) {
+      this.collection();
+    } else {
+      this.cancelCollection();
+    }
+  },
+  //收藏
+  collection: function () {
+    let that = this;
+    var index = this.data.count
+    var qid = this.data.questions[index - 1].qid
+    let userInfo = wx.getStorageSync('userInfo');
+    util.request(api.CollectionQuestions, { qid: qid, nickName: userInfo.nickName }).then(function (res) {
+    });
+  },
+  //取消收藏
+  cancelCollection: function () {
+    let that = this;
+    var index = this.data.count 
+    var qid = this.data.questions[index - 1].qid
+    let userInfo = wx.getStorageSync('userInfo');
+    util.request(api.CancelCollection, { qid: qid, nickName: userInfo.nickName }).then(function (res) {
+
+    });
   },
   // 页面滑动
   //   wx.switchTab({
@@ -134,15 +161,28 @@ Page({
     if (start[0] < end[0] - 30) {
       wx.setStorageSync("counta", that.data.count - 1);
       console.log('右滑')//上一题
-      this.getRead();
-      this.onLoad();
+      if (that.data.count > 0) {
+        this.onLoad();
+      }
+      if (that.data.count == 1) {
+        wx.showToast({
+          title: '已是第一题',
+        })
 
+      }
+    
     } else if (start[0] > end[0] + 30) {
       wx.setStorageSync("counta", that.data.count + 1);
       console.log('左滑')//下一题
-      this.getRead();
-      this.onLoad();
       
+      if (that.data.count < that.data.questions.length) {
+        this.onLoad();
+
+      } else {
+        wx.showToast({
+          title: '已是最后一题',
+        })
+      }
 
     } else {
       console.log('静止')
@@ -154,7 +194,9 @@ Page({
     var id=wx.getStorageSync("id");
     let that=this;
     var levelName = wx.getStorageSync('levelName');
-    util.request(api.GetRealQuset+id+"/"+levelName+"/").then(res=>{
+    let userInfo = wx.getStorageSync('userInfo');
+    var nickName = userInfo.nickName;
+    util.request(api.GetRealQuset + id + "/" + levelName + "/" + nickName+"/").then(res=>{
       if (res.errno === 0) {
         that.setData({
           questions: res.data.allQuestions,
@@ -179,6 +221,21 @@ Page({
         }
     }
     console.log("rchoice" + this.data.rchoice)
+  },
+  //错题
+  wrongQuestions: function () {
+    let that = this;
+    var index = this.data.count
+    var qid = this.data.questions[index - 1].qid
+    let userInfo = wx.getStorageSync('userInfo');
+    util.request(api.WrongQuestions, { qid: qid, nickName: userInfo.nickName }).then(function (res) {
+    });
+  },
+  //首页
+  goHome() {
+    wx.switchTab({
+      url: '/pages/index/index',
+    })
   },
   /**
    * 生命周期函数--监听页面加载

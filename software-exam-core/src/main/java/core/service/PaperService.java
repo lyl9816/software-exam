@@ -11,6 +11,6 @@ public interface PaperService {
     //获取真题卷子名
     public List<Paper> selectAllPeper();
     //获取真题及选项及解析
-    public List<RealChoicesDto> selectRealQuestions(Integer id,Integer levelId);
+    public List<RealChoicesDto> selectRealQuestions(Integer id,Integer levelId,Integer uid);
 
 }

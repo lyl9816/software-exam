@@ -5,10 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import software.exam.db.domain.*;
-import software.exam.db.mapper.AnalyzeMapper;
-import software.exam.db.mapper.ChoicesMapper;
-import software.exam.db.mapper.PaperMapper;
-import software.exam.db.mapper.RealQuestionsMapper;
+import software.exam.db.mapper.*;
 import software.exam.db.model.dto.RealChoicesDto;
 import software.exam.db.model.dto.RealQuestionDto;
 
@@ -26,6 +23,8 @@ public class PaperServiceImpl implements PaperService {
     private ChoicesMapper choicesMapper;
     @Autowired
     private AnalyzeMapper analyzeMapper;
+    @Autowired
+    private CollectionMapper collectionMapper;
 
     @Override
     public List<Paper> selectAllPeper() {
@@ -36,7 +35,8 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
-    public List<RealChoicesDto> selectRealQuestions(Integer id,Integer levelId) {
+    public List<RealChoicesDto> selectRealQuestions(Integer id,Integer levelId,
+                                                    Integer uid) {
         //获取所有题目
         List<RealQuestionDto> realQuestionDtos = realQuestionsMapper.seleteRealQuestions(id, levelId);
         log.info("pid:"+id);
@@ -55,9 +55,17 @@ public class PaperServiceImpl implements PaperService {
             log.info("analyze:"+analyze.getDetail());
             RealChoicesDto realChoicesDto=new RealChoicesDto();
             realChoicesDto.setRqid(rqid);
+            realChoicesDto.setQid(qid);
             realChoicesDto.setTitle(title);
             realChoicesDto.setDetail(analyze.getDetail());
             realChoicesDto.setChoices(choices);
+            //判断是否已收藏
+            Collection collection=collectionMapper.selectByQid(qid,uid);
+            if(collection !=null){
+                realChoicesDto.setCollection(true);
+            }else{
+                realChoicesDto.setCollection(false);
+            }
             realChoicesDtos.add(realChoicesDto);
         }
         return realChoicesDtos;

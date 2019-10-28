@@ -37,7 +37,7 @@ public class WrongServiceImpl  implements WrongService {
         List<WrongQuestions> wrongQuestions1 = wrongQuestionsMapper.selectByExample(example);
         for (WrongQuestions wrongQuestions2:wrongQuestions1){
             Integer qid = wrongQuestions2.getQid();
-            if (wrongQuestions.getQid()==qid&&wrongQuestions.getUid()==uid){
+            if (wrongQuestions.getQid()==qid&&wrongQuestions2.getUid()==uid){
                 i=1;
                 flag=false;
                 break;

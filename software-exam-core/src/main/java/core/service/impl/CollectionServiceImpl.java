@@ -39,7 +39,7 @@ public class CollectionServiceImpl implements CollectionService {
         List<Collection> collections = collectionMapper.selectByExample(collectionExample);
         for (Collection collection1:collections){
             Integer qid = collection1.getQid();
-            if (collection.getQid()==qid&&collection.getUid()==uid){
+            if (collection.getQid()==qid&&collection1.getUid()==uid){
                 insert=1;
                 flag=false;
                 break;

@@ -16,7 +16,7 @@
 
 <!--pages/main/main.wxml-->
 <i-notice-bar icon="systemprompt" loop>
-    2018年世界杯,将于6月14日至7月15日举行;2018年世界杯,将于6月14日至7月15日举行;
+    <text>{{tips[0].tip}}</text>
 </i-notice-bar>
 
 

@@ -1,4 +1,7 @@
 //index.js
+var util = require('../../utils/util.js');
+var api = require('../../config/api.js');
+var user = require('../../utils/user.js');
 //获取应用实例
 const app = getApp()
 
@@ -9,6 +12,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     current: 'homepage',
+    tip:'',
     //分类等级
     fruit: [
       {id: 1, name: '初级',}, 
@@ -18,6 +22,20 @@ Page({
     current2: '初级',
     position: 'left',
     showRight1: false,
+  },
+  //通告
+  getTips: function () {
+    let that = this;
+    util.request(api.GetTips).then(res => {
+      if (res.errno === 0) {
+        that.setData({
+          tips: res.data.tips
+        })
+        console.log(res.data.tips)
+      } else {
+
+      }
+    })
   },
   // 选项事件
   handleFruitChange({ detail = {} }) {
@@ -50,8 +68,8 @@ Page({
    
   // },
   onLoad: function () {
+    this.getTips();
    //加载选择分类等级
-
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

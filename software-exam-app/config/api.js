@@ -20,6 +20,8 @@ module.exports = {
   GetLevel: WxApiRoot+'getLevel',//获取分类等级
   GetPapers: WxApiRoot+'paperInfo',//获取往年卷题
   GetRealQuset: WxApiRoot+'getRealQuestions/',//获取真题题目
+  GetTips: WxApiRoot +'getBoardTip',//获取通告
+  GetContents: WxApiRoot +'getBoardContents',//获取注意事项
 
 
   AuthLoginByWeixin: WxApiRoot + 'login_by_weixin', //微信登录
