@@ -211,13 +211,15 @@ collection:function(){
         this.onLoad();
       }
       //显示做过的题
+      if (that.data.choiceArray[that.data.count - 1]){
       var j = that.data.count;
       console.log(that.data.choiceArray[that.data.count - 1].choice)
-      that.setData({
+     that.setData({
         current2: that.data.choiceArray[that.data.count - 1].choice,
         flagchoices: true,
         flag: that.data.choiceArray[that.data.count - 1].flag
       })
+      }
       //判断是否为最后一题
       if (that.data.count==1){
         wx.showToast({
