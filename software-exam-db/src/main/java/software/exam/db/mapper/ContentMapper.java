@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import software.exam.db.domain.Content;
 import software.exam.db.domain.ContentExample;
+import software.exam.db.model.dto.CourseDto;
 
 public interface ContentMapper {
     long countByExample(ContentExample example);
@@ -27,4 +28,6 @@ public interface ContentMapper {
     int updateByPrimaryKeySelective(Content record);
 
     int updateByPrimaryKey(Content record);
+    //获取知识点
+    List<CourseDto> selectCourses();
 }

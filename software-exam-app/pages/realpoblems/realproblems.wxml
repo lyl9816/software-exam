@@ -23,7 +23,7 @@
 <view wx:if="{{current==='tab1'}}">
 <i-panel title="group-水果">
     <i-radio-group current="{{current2}}" bindchange="handleFruitChange">
-        <i-radio  wx:for="{{questions[count-1].choices}}" position="{{position}}" wx:key="{{item.id}}" value="{{item.content}}" >
+        <i-radio  wx:for="{{questions[count-1].choices}}" disabled="{{flagchoices}}"position="{{position}}" wx:key="{{item.id}}" value="{{item.content}}" >
         </i-radio>
     </i-radio-group>
 </i-panel>

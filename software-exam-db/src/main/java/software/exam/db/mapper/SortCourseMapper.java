@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import software.exam.db.domain.SortCourse;
 import software.exam.db.domain.SortCourseExample;
+import software.exam.db.model.dto.CourseDto;
 
 public interface SortCourseMapper {
     long countByExample(SortCourseExample example);
@@ -27,4 +28,5 @@ public interface SortCourseMapper {
     int updateByPrimaryKeySelective(SortCourse record);
 
     int updateByPrimaryKey(SortCourse record);
+
 }

@@ -41,6 +41,9 @@ Page({
     isright:[],//答对的题目
     iswrong:[],//答错的题目
     rchoice:'',//背题答案
+    choiceArray: [],//选过的选项
+    flagProblems:false//判断此题有没有做过
+    
 
   },
   toggleRight1() {
@@ -65,6 +68,7 @@ Page({
             this.setData({
               flag:true,
               isright: righttemp,
+              flagchoices: true,
             })
            
           }else{//答错题目
@@ -75,6 +79,7 @@ Page({
           this.setData({
             flag: false,
             iswrong: wrongtemp,
+            flagchoices: true,
           })
           }
         }
@@ -82,8 +87,31 @@ Page({
     console.log("flag:"+this.data.flag)
     console.log('isright[]:'+this.data.isright.length)
     console.log('iswrong[]:' + this.data.iswrong.length)
-    if (this.data.flag == false) {
+    if (this.data.flag == false) {//错题
       this.wrongQuestions();
+    }
+    //做过的题
+    this.problems();
+  },
+  //做过的题目保存到数组
+  problems: function () {
+    var f = true;
+    for (var i = 0; i < this.data.choiceArray.length; i++) {
+      if (this.data.choiceArray[i] == this.data.count) {
+        f = false;
+        break;
+      } else {
+        f = true;
+      }
+    }
+    if (f) {
+      var num = this.data.choiceArray
+      var str = { "choice": this.data.current2, "flag": this.data.flag, "pageNum": this.data.count }
+      num.push(str)
+      this.setData({
+        choiceArray: num
+      })
+      console.log("array" + this.data.choiceArray[0].pageNum)
     }
   },
   //答题/背题
@@ -164,6 +192,16 @@ Page({
       if (that.data.count > 0) {
         this.onLoad();
       }
+      //显示做过的题
+      if (that.data.choiceArray[that.data.count - 1]) {
+        var j = that.data.count;
+        console.log(that.data.choiceArray[that.data.count - 1].choice)
+        that.setData({
+          current2: that.data.choiceArray[that.data.count - 1].choice,
+          flagchoices: true,
+          flag: that.data.choiceArray[that.data.count - 1].flag
+        })
+      }
       if (that.data.count == 1) {
         wx.showToast({
           title: '已是第一题',
@@ -172,6 +210,9 @@ Page({
       }
     
     } else if (start[0] > end[0] + 30) {
+      this.setData({
+        flagchoices: false
+      });
       wx.setStorageSync("counta", that.data.count + 1);
       console.log('左滑')//下一题
       
@@ -183,12 +224,40 @@ Page({
           title: '已是最后一题',
         })
       }
-
+      //做过的题显示
+      this.reproblem()
     } else {
       console.log('静止')
     }
   },
-
+  //右滑做过的题显示
+  reproblem: function () {
+    var f = false;
+    if (this.data.choiceArray.length > 0 && this.data.choiceArray != null) {
+      for (var i = 0; i < this.data.choiceArray.length; i++) {
+        if (this.data.choiceArray[i].pageNum == this.data.count) {
+          f = true;
+          break;
+        } else {
+          f = false;
+        }
+      }
+    }
+    console.log("f" + f)
+    if (f) {
+      this.setData({
+        current2: this.data.choiceArray[this.data.count - 1].choice,
+        flagchoices: true,
+        flag: this.data.choiceArray[this.data.count - 1].flag
+      })
+    } else {
+      //选项可选
+      this.setData({
+        current2: "",
+        flagchoices: false,
+      })
+    }
+  },
   //获取答题模式真题
   getDetils:function(){
     var id=wx.getStorageSync("id");

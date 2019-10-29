@@ -9,6 +9,7 @@
         </i-collapse-item>
      <i-collapse-item title="考试小贴士" name="name1" class="title">
         <view slot="content" >
+        带上信心和微笑，你一定可以的👍
           </view>
         </i-collapse-item>
     </i-collapse>

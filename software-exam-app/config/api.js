@@ -19,9 +19,10 @@ module.exports = {
   GetMsgDetail: WxApiRoot + 'sysmsg/getDetail/', //获取消息详细
   GetLevel: WxApiRoot+'getLevel',//获取分类等级
   GetPapers: WxApiRoot+'paperInfo',//获取往年卷题
-  GetRealQuset: WxApiRoot+'getRealQuestions/',//获取真题题目
+  GetRealQuset: WxApiRoot+'getRealQuestions',//获取真题题目
   GetTips: WxApiRoot +'getBoardTip',//获取通告
   GetContents: WxApiRoot +'getBoardContents',//获取注意事项
+  GetCourses: WxApiRoot + 'getCourses',//获取知识点
 
 
   AuthLoginByWeixin: WxApiRoot + 'login_by_weixin', //微信登录

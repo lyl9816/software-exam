@@ -6,6 +6,15 @@
     <result column="tid" jdbcType="INTEGER" property="tid" />
     <result column="content" jdbcType="VARCHAR" property="content" />
   </resultMap>
+  <resultMap id="BaseResultMap2" type="software.exam.db.model.dto.CourseDto">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="tid" jdbcType="INTEGER" property="tid" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="second_title" jdbcType="VARCHAR" property="secondTitle" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -178,4 +187,9 @@
       content = #{content,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectCourses" resultMap="BaseResultMap2">
+SELECT c.id,c.content,c.tid,t.second_title,t.cid,sc.name,sc.status
+FROM `content` c,second_title t ,sort_course sc
+WHERE c.tid=t.id AND t.cid=sc.id
+  </select>
 </mapper>

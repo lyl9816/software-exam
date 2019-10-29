@@ -1,18 +1,33 @@
 // pages/knowledge/knowledge.js
+var util = require('../../utils/util.js');
+var api = require('../../config/api.js');
+var user = require('../../utils/user.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-     scrollTop: 0
+     scrollTop: 0,
+     course:[],
+      titles:[],
   },
+  getCourses:function(){
+    let that=this;
+    util.request(api.GetCourses).then(function(res){
+        that.setData({
+          titles: res.data.titleCourses,
+          course: res.data.courses,
+        });
+      console.log(that.data.course)
+    });
 
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getCourses();
   },
 
   /**

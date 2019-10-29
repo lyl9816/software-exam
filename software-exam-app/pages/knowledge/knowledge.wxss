@@ -2,3 +2,9 @@
 .font{
   color: tomato;
 }
+.stitle{
+  color:cornflowerblue
+}
+.word{
+  color: black
+}
