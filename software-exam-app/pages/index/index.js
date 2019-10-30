@@ -2,6 +2,7 @@
 var util = require('../../utils/util.js');
 var api = require('../../config/api.js');
 var user = require('../../utils/user.js');
+const { $Toast } = require('../../dist/base/index');
 //获取应用实例
 const app = getApp()
 
@@ -22,6 +23,13 @@ Page({
     current2: '初级',
     position: 'left',
     showRight1: false,
+  },
+  //警告
+  handleWarning() {
+    $Toast({
+      content: '请先登录,并在本页右下角选择软考等级',
+      type: 'warning'
+    });
   },
   //通告
   getTips: function () {
@@ -111,30 +119,56 @@ Page({
     });
   },
   goKnowledge() {
-    wx.navigateTo({
-      url: "/pages/knowledge/knowledge"
-    })
+    var userInfo = wx.getStorageSync("userInfo")
+    if (userInfo.nickName == null) {
+      this.handleWarning();
+    } else {
+      wx.navigateTo({
+        url: "/pages/knowledge/knowledge"
+      })
+    }
+   
   },
   goReal(){
+   var userInfo= wx.getStorageSync("userInfo")
+    if (userInfo.nickName==null) {
+      this.handleWarning();
+    } else {
     wx.navigateTo({
       url: '/pages/real/real',
     })
+    }
   },
   goOrderProblems(){
+    var userInfo = wx.getStorageSync("userInfo")
+    if (userInfo.nickName == null) {
+      this.handleWarning();
+    } else {
     wx.navigateTo({
       url: '/pages/problems/problems?sort='+2,
     })
+    }
   },
   goProblems() {
+    var userInfo = wx.getStorageSync("userInfo")
+    if (userInfo.nickName == null) {
+      this.handleWarning();
+    } else {
     wx.navigateTo({
       url: '/pages/problems/problems?sort='+1,
     })
+    }
   },
   goOnline()
   {
+    var userInfo = wx.getStorageSync("userInfo")
+    if (userInfo.nickName == null) {
+      this.handleWarning();
+    } else {
     wx.navigateTo({
       url: '/pages/online/online',
     })
+    }
   }
 
 })

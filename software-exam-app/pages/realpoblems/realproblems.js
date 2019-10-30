@@ -265,7 +265,7 @@ Page({
     var levelName = wx.getStorageSync('levelName');
     let userInfo = wx.getStorageSync('userInfo');
     var nickName = userInfo.nickName;
-    util.request(api.GetRealQuset + id + "/" + levelName + "/" + nickName+"/").then(res=>{
+    util.request(api.GetRealQuset + "/" + id + "/" + levelName + "/" + nickName+"/").then(res=>{
       if (res.errno === 0) {
         that.setData({
           questions: res.data.allQuestions,

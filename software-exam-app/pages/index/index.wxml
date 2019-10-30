@@ -19,6 +19,9 @@
     <text>{{tips[0].tip}}</text>
 </i-notice-bar>
 
+<!-- 警告 -->
+<!-- <i-button type="ghost" bind:click="handleWarning">警告</i-button> -->
+<i-toast id="toast" />
 
 <i-grid>
     <i-grid-item bindtap="goOnline">
