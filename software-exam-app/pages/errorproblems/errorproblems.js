@@ -273,6 +273,7 @@ Page({
       
       if (that.data.count < that.data.order.length) {
         this.onLoad();
+        this.showWrongAnswer();
 
       } else {
         wx.showToast({

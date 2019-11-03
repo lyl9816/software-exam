@@ -228,7 +228,7 @@
   <!--随机题库-->
   <select id="selectRandom" parameterType="java.lang.Integer" resultMap="BaseResultMap1">
     SELECT q.*,a.*, s.`name` FROM questions q ,`analyze` a,sort_course s
-     WHERE lid = 1 and q.id=a.qid and q.cid=s.id ORDER BY RAND()
+     WHERE lid = #{level,jdbcType=INTEGER} and q.id=a.qid and q.cid=s.id ORDER BY RAND()
   </select>
 <!-- 根据题目id获取题目、对应科目以及正确答案(错题库和我的收藏) -->
   <select id="selectAllByQid" parameterType="java.lang.Integer" resultMap="CWResultMap">

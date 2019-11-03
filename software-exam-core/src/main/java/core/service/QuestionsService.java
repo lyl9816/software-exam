@@ -21,7 +21,7 @@ public interface QuestionsService {
     List<QuestionsDto> findAnswerByLevel(int level,int uid);
 
     /**
-     * 随机按分类获取题目，正确答案，科目
+     * 随机按分类获取题目，答案，科目
      * @param level
      * @return
      */

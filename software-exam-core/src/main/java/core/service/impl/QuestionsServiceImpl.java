@@ -73,7 +73,7 @@ public class QuestionsServiceImpl implements QuestionsService {
         return questionsDtos;
     }
     /**
-     * 随机按分类获取题目，正确答案，科目
+     * 随机按分类获取题目，答案，科目
      * @param level
      * @return
      */

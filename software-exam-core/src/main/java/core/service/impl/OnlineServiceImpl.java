@@ -13,7 +13,6 @@ import java.util.List;
 @Service
 public class OnlineServiceImpl implements OnlineService {
 
-    @Autowired
     private QuestionsMapper questionsMapper;
 
     @Autowired
@@ -49,6 +48,7 @@ public class OnlineServiceImpl implements OnlineService {
         Collection collection = collectionMapper.selectByQid(qid,uid);
         return collection;
     }
+
 
 
 }

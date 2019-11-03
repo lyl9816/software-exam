@@ -249,7 +249,7 @@ Page({
 
       if (that.data.count < that.data.order.length) {
         this.onLoad();
-
+         this.showCoAnswer();
       } else {
         wx.showToast({
           title: '已经是最后一题！',

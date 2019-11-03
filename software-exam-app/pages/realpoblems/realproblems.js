@@ -218,7 +218,7 @@ Page({
       
       if (that.data.count < that.data.questions.length) {
         this.onLoad();
-
+        this.getRead();
       } else {
         wx.showToast({
           title: '已是最后一题',

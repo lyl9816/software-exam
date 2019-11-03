@@ -229,13 +229,7 @@ collection:function(){
       })
     
       }
-      // if (this.data.sort == 1) {
-      //   if (this.data.current === 'tab1') {
-      //     this.randomQuestion();
-      //   } else {
-      //     this.randomshowAnswer();
-      //   }
-      // }
+
     
     
     } else if (start[0] > end[0] + 30) {
@@ -246,7 +240,7 @@ collection:function(){
 
       if(that.data.count<that.data.order.length){
         this.onLoad();
-        
+        this.randomshowAnswer();
       }else{
         wx.showToast({
           title: '已是最后一题',
@@ -262,7 +256,7 @@ collection:function(){
     }
   },
 
-  //右滑做过的题显示
+  //左滑做过的题显示
   reproblem:function(){
     var f = false;
     if (this.data.choiceArray.length > 0 && this.data.choiceArray!=null){
@@ -275,7 +269,6 @@ collection:function(){
       }
       }
     }
-    console.log("f"+f)
     if (f) {
       this.setData({
         current2: this.data.choiceArray[this.data.count - 1].choice,
@@ -307,7 +300,6 @@ collection:function(){
           order:res.data,
         });
     console.log(that.data.order)
-     //  console.log(that.data.total)
      }
 
    })
@@ -323,10 +315,11 @@ collection:function(){
         }
 
       }
+    console.log("==============" + this.data.choice)
   },
   //  随机题库答题模式
   randomQuestion: function () {
-
+    console.log("+++++++++++++++" + this.data.levelName)
     let that = this;
     let userInfo = wx.getStorageSync('userInfo');
     util.request(api.RandomQuestions, { levelName: that.data.levelName,nickName:userInfo.nickName }).then(function (res) {
@@ -338,7 +331,7 @@ collection:function(){
         that.setData({
           order: res.data,
         });
-        console.log(that.data.order)
+        console.log(res.data)
       }
 
     })
