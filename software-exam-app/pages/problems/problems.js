@@ -211,6 +211,7 @@ collection:function(){
       console.log('右滑')//上一题
     if(that.data.count>0){
         this.onLoad();
+      this.randomshowAnswer();
       }
       //显示做过的题
       if (that.data.choiceArray[that.data.count - 1]){

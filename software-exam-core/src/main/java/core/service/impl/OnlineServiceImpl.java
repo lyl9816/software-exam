@@ -13,6 +13,7 @@ import java.util.List;
 @Service
 public class OnlineServiceImpl implements OnlineService {
 
+    @Autowired
     private QuestionsMapper questionsMapper;
 
     @Autowired
@@ -31,7 +32,6 @@ public class OnlineServiceImpl implements OnlineService {
 
         //从数据库中取出随机75条题目存到List数组中
         List<Questions> questionsList = questionsMapper.limitAndRandAll(lid);
-
         return questionsList;
     }
 
