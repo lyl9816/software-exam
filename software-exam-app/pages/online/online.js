@@ -250,10 +250,17 @@ Page({
     console.log("f" + f)
     if (f) {
       this.setData({
-        current2: this.data.choiceArray[this.data.count - 1].choice,
         flagchoices: true,
-        flag: this.data.choiceArray[this.data.count - 1].flag
+        
       })
+    if(this.data.choiceArray.length>0 && this.data.count<this.data.questions.length)
+      {
+        this.setData({
+          current2: this.data.choiceArray[this.data.count - 1].choice,
+          flag: this.data.choiceArray[this.data.count - 1].flag
+        })
+
+      }
     } else {
 
       //选项可选
@@ -286,34 +293,39 @@ Page({
    */
   commitPaper: function () {
     wx.setStorageSync("timer", new Date().getTime() + 7200000)
-    console.log("================");
-    console.log(wx.getStorageSync("timer"));
+    
     var counti = wx.getStorageSync("counta");
-    if (counti > this.data.questions.length) {
+    console.log("================");
+    console.log(counti);
+    if (this.data.choiceArray.length === this.data.questions.length || counti > this.data.questions.length) {
       var score = this.data.rightChoice.length;
       console.log(score);
       wx.navigateTo({
         url: '/pages/score/score?score=' + score,
       })
+
+      wx.removeStorageSync("counta");
+      this.setData({
+        flag: false,
+        current2: "",
+        //答对题号
+        rightChoice: [],
+        //答错题号
+        wrongChoice: [],
+        flagchoices: false,
+        problemsArray: [],
+        flagProblems: false,
+        choiceArray: [],//选过的选项
+      })
     } else {
       wx.showToast({
         title: '还没有答完题！',
       })
-    }
-    wx.removeStorageSync("counta");
-    this.setData({
-      flag: false,
-      current2: "",
-      //答对题号
-      rightChoice: [],
-      //答错题号
-      wrongChoice: [],
-      flagchoices: false,
-      problemsArray: [],
-      flagProblems: false,
-      choiceArray: [],//选过的选项
-    })
 
+    }
+   
+
+   
 
   },
 
@@ -330,6 +342,14 @@ Page({
     that.setData({
       ttime: wx.getStorageSync("timer")
     })
+    //倒计时结束
+    if(this.data.ttime == 0)
+    {
+      wx.showToast({
+        title: '时间到！点击左下角交卷！',
+      })
+    }
+
 
 
     var counta = wx.getStorageSync("counta");

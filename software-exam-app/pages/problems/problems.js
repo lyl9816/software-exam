@@ -135,17 +135,36 @@ problems:function(){
       order:this.data.order,
       count:1
     });
+    //顺序题库
     if (this.data.sort == 2){
     if(this.data.current==='tab1'){
+      this.setData({
+        current2: "",
+        right: 0,
+        error: 0,
+        choiceArray: [],
+        flagchoices: false,
+      })
       this.orderquestion();
+
     }else{
       this.showAnswer();
     }
     }
+    //随机题库
     if (this.data.sort == 1) {
       if (this.data.current === 'tab1') {
+        this.setData({
+          choiceArray: [],
+          flagchoices: false,
+          current2: "",
+          right: 0,
+          error: 0
+        })
         this.randomQuestion();
+        
       } else {
+      
         this.randomshowAnswer();
       }
     }
@@ -211,7 +230,11 @@ collection:function(){
       console.log('右滑')//上一题
     if(that.data.count>0){
         this.onLoad();
-      this.randomshowAnswer();
+      if (that.data.sort == 1) {
+        if (that.data.current === 'tab2') {
+          that.randomshowAnswer();
+        }
+      }
       }
       //显示做过的题
       if (that.data.choiceArray[that.data.count - 1]){
@@ -241,7 +264,11 @@ collection:function(){
 
       if(that.data.count<that.data.order.length){
         this.onLoad();
-        this.randomshowAnswer();
+        if (that.data.sort == 1) {
+          if (that.data.current === 'tab2') {
+            that.randomshowAnswer();
+          }
+        }
       }else{
         wx.showToast({
           title: '已是最后一题',
@@ -272,10 +299,16 @@ collection:function(){
     }
     if (f) {
       this.setData({
-        current2: this.data.choiceArray[this.data.count - 1].choice,
+       
         flagchoices: true,
-        flag: this.data.choiceArray[this.data.count - 1].flag
+       
       })
+      if (this.data.choiceArray.length > 0 && this.data.count < this.data.order.length){
+        this.setData({
+          current2: this.data.choiceArray[this.data.count - 1].choice,
+          flag: this.data.choiceArray[this.data.count - 1].flag
+        })
+      }
     }else{
 
       //选项可选
@@ -316,11 +349,11 @@ collection:function(){
         }
 
       }
-    console.log("==============" + this.data.choice)
+   
   },
   //  随机题库答题模式
   randomQuestion: function () {
-    console.log("+++++++++++++++" + this.data.levelName)
+  
     let that = this;
     let userInfo = wx.getStorageSync('userInfo');
     util.request(api.RandomQuestions, { levelName: that.data.levelName,nickName:userInfo.nickName }).then(function (res) {
@@ -378,7 +411,9 @@ collection:function(){
       errormessage: "",
       flagchoices: false,
       problemsArray: [],
-      flagProblems: false
+      flagProblems: false,
+      choiceArray: [],
+
 
     });
     wx.switchTab({

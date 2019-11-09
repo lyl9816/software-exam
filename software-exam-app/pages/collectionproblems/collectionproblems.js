@@ -98,6 +98,11 @@ Page({
       count: 1
     });
     if (this.data.current === 'tab1') {
+      this.setData({
+        current2: "",
+        choiceArray: [],
+        flagchoices: false,
+      })
       this.showCollections();
     } else {
       this.showCoAnswer();
@@ -223,7 +228,9 @@ Page({
       console.log('右滑')//上一题
       if (that.data.count > 0) {
         this.onLoad();
-        this.showCoAnswer();
+        if (that.data.current === 'tab2') {
+          this.showCoAnswer();
+        }
       }
       //显示做过的题
       if (that.data.choiceArray[that.data.count - 1]) {
@@ -250,7 +257,9 @@ Page({
 
       if (that.data.count < that.data.order.length) {
         this.onLoad();
-         this.showCoAnswer();
+        if (that.data.current === 'tab2') {
+          this.showCoAnswer();
+        }
       } else {
         wx.showToast({
           title: '已经是最后一题！',
@@ -282,10 +291,14 @@ Page({
     console.log("f" + f)
     if (f) {
       this.setData({
-        current2: this.data.choiceArray[this.data.count - 1].choice,
         flagchoices: true,
-        flag: this.data.choiceArray[this.data.count - 1].flag
       })
+      if (this.data.choiceArray.length > 0 && this.data.count < this.data.order.length) {
+        this.setData({
+          current2: this.data.choiceArray[this.data.count - 1].choice,
+          flag: this.data.choiceArray[this.data.count - 1].flag
+        })
+      }
     } else {
 
       //选项可选

@@ -44,7 +44,7 @@
 <view wx:if="{{current2&&current==='tab1'}}" class="caption-wrap">
 <view wx:if="{{flag==false}}" style="color:red">答案选择错误</view>
 <view wx:if="{{flag==true}}" style="color:green">答案选择正确</view>
-    <i-collapse name="{{name}}">
+    <i-collapse  wx:if="{{flag==false}}" name="{{name}}">
         <i-collapse-item title="答案解析：" name="name1">
             <view slot="content">
                {{order[count-1].detail}}

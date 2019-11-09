@@ -11,7 +11,8 @@
 </view>
 
 
-
+<!-- 页面左右滑动 -->
+<view class='btn'  bindtouchstart='touchStart' bindtouchmove='touchMove' bindtouchend='touchEnd'>
 <!-- 题目： -->
 <view>
 <i-tag 
@@ -22,6 +23,8 @@
 </i-tag>
 <!-- 从数据库读取的题目....... -->
 {{questions[count-1].title}}
+</view>
+<!-- 这是滑动效果的view -->
 </view>
 
 
@@ -36,13 +39,7 @@
     </i-radio-group>
 </i-panel>
 </view>
-<!-- 页面左右滑动 -->
-<view class='btn'  bindtouchstart='touchStart' bindtouchmove='touchMove' bindtouchend='touchEnd'>
-  
-  <view style="color:blue">此处滑动答题
-  </view>
-<!-- 这是滑动效果的view -->
-</view>
+
 
 
 <!-- 底部 -->

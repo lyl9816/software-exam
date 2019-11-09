@@ -135,6 +135,11 @@ Page({
    
     });
     if (this.data.current === 'tab1') {
+      this.setData({
+        current2: "",
+        choiceArray: [],
+        flagchoices: false,
+      })
       this.showWrongQuestions();
     } else {
       this.showWrongAnswer();
@@ -168,7 +173,8 @@ Page({
   },
   //收藏
   handleCollection() {
-    let isCollected = !this.data.isCollected
+    let isCollected = !this.data.order[this.data.count - 1].collection;
+    this.data.order[this.data.count - 1].collection = isCollected;
     this.setData({
       // 下面本来是这样子的:isCollected=isCollected,可以简写
       isCollected
@@ -246,7 +252,9 @@ Page({
       console.log('右滑')//上一题
       if (that.data.count > 0) {
         this.onLoad();
-        this.showWrongAnswer();
+        if (that.data.current === 'tab2') {
+         this.showWrongAnswer();
+        }
       }
       //显示做过的题
       if (that.data.choiceArray[that.data.count - 1]) {
@@ -265,16 +273,15 @@ Page({
         })
       }
     } else if (start[0] > end[0] + 30) {
-      //下一题的时候选项恢复可用
-      this.setData({
-        flagchoices: false
-      });
+   
       wx.setStorageSync("counta", that.data.count + 1);
       console.log('左滑')//下一题
       
       if (that.data.count < that.data.order.length) {
         this.onLoad();
-        this.showWrongAnswer();
+        if (that.data.current === 'tab2') {
+          that.showWrongAnswer();
+        }
 
       } else {
         wx.showToast({
@@ -282,7 +289,7 @@ Page({
         })
       }
       //做过的题显示
-      this.reproblem()
+      this.reproblem();
 
     } else {
       console.log('静止')
@@ -303,13 +310,17 @@ Page({
       }
       }
     }
-    console.log("f" + f)
+  
     if (f) {
       this.setData({
-        current2: this.data.choiceArray[this.data.count - 1].choice,
         flagchoices: true,
-        flag: this.data.choiceArray[this.data.count - 1].flag
       })
+      if (this.data.choiceArray.length > 0 && this.data.count < this.data.order.length) {
+        this.setData({
+          current2: this.data.choiceArray[this.data.count - 1].choice,
+          flag: this.data.choiceArray[this.data.count - 1].flag
+        })
+      }
     } else {
 
       //选项可选
