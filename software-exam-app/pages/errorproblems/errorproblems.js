@@ -137,6 +137,8 @@ Page({
     if (this.data.current === 'tab1') {
       this.setData({
         current2: "",
+        right: 0,
+        error: 0,
         choiceArray: [],
         flagchoices: false,
       })
@@ -315,7 +317,7 @@ Page({
       this.setData({
         flagchoices: true,
       })
-      if (this.data.choiceArray.length > 0 && this.data.count < this.data.order.length) {
+      if (this.data.choiceArray.length > 0 && this.data.count < this.data.order.length+1) {
         this.setData({
           current2: this.data.choiceArray[this.data.count - 1].choice,
           flag: this.data.choiceArray[this.data.count - 1].flag

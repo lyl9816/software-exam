@@ -246,6 +246,7 @@ collection:function(){
         flag: that.data.choiceArray[that.data.count - 1].flag
       })
       }
+      
       //判断是否为最后一题
       if (that.data.count==1){
         wx.showToast({
@@ -257,22 +258,25 @@ collection:function(){
     
     
     } else if (start[0] > end[0] + 30) {
-       wx.setStorageSync("counta", that.data.count+1);
+      
       console.log('左滑')//下一题
     
      
 
       if(that.data.count<that.data.order.length){
+        wx.setStorageSync("counta", that.data.count + 1);
         this.onLoad();
         if (that.data.sort == 1) {
           if (that.data.current === 'tab2') {
             that.randomshowAnswer();
           }
         }
+      
       }else{
         wx.showToast({
           title: '已是最后一题',
         })
+   
       }
 
       //做过的题显示
@@ -303,7 +307,7 @@ collection:function(){
         flagchoices: true,
        
       })
-      if (this.data.choiceArray.length > 0 && this.data.count < this.data.order.length){
+      if (this.data.choiceArray.length > 0 && this.data.count < this.data.order.length+1){
         this.setData({
           current2: this.data.choiceArray[this.data.count - 1].choice,
           flag: this.data.choiceArray[this.data.count - 1].flag

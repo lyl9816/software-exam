@@ -297,7 +297,7 @@ Page({
     var counti = wx.getStorageSync("counta");
     console.log("================");
     console.log(counti);
-    if (this.data.choiceArray.length === this.data.questions.length || counti > this.data.questions.length) {
+    if (this.data.choiceArray.length === this.data.questions.length && counti > this.data.questions.length) {
       var score = this.data.rightChoice.length;
       console.log(score);
       wx.navigateTo({

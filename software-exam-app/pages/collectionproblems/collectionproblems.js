@@ -101,6 +101,8 @@ Page({
       this.setData({
         current2: "",
         choiceArray: [],
+        right: 0,
+        error: 0,
         flagchoices: false,
       })
       this.showCollections();
@@ -293,7 +295,7 @@ Page({
       this.setData({
         flagchoices: true,
       })
-      if (this.data.choiceArray.length > 0 && this.data.count < this.data.order.length) {
+      if (this.data.choiceArray.length > 0 && this.data.count < this.data.order.length+1) {
         this.setData({
           current2: this.data.choiceArray[this.data.count - 1].choice,
           flag: this.data.choiceArray[this.data.count - 1].flag
