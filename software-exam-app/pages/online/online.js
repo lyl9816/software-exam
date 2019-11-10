@@ -292,7 +292,7 @@ Page({
    * 提交试卷
    */
   commitPaper: function () {
-    wx.setStorageSync("timer", new Date().getTime() + 7200000)
+   
     
     var counti = wx.getStorageSync("counta");
     console.log("================");
@@ -317,6 +317,7 @@ Page({
         flagProblems: false,
         choiceArray: [],//选过的选项
       })
+      wx.setStorageSync("timer", new Date().getTime() + 7200000)
     } else {
       wx.showToast({
         title: '还没有答完题！',
@@ -419,7 +420,6 @@ Page({
       clearTimer: true
     });
     wx.removeStorageSync("counta");
-    wx.removeStorageSync("counta");
     this.setData({
       flag: false,
       current2: "",
@@ -432,6 +432,7 @@ Page({
       flagProblems: false,
       choiceArray: [],//选过的选项
     })
+    wx.setStorageSync("timer", new Date().getTime() + 7200000)
   },
 
   /**
