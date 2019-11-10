@@ -119,13 +119,14 @@ problems:function(){
     }
   }
   if (f) {
-    var num = this.data.choiceArray
-    var str = { "choice": this.data.current2, "flag": this.data.flag, "pageNum": this.data.count }
-    num.push(str)
+
+      var num = this.data.choiceArray
+      var str = { "choice": this.data.current2, "flag": this.data.flag, "pageNum": this.data.count }
+      console.log("=============="+str)
+      num.push(str)
     this.setData({
       choiceArray: num
     })
-    console.log("array" + this.data.choiceArray[0].pageNum)
   }
 },
 //答题模式背题模式选择
@@ -237,15 +238,7 @@ collection:function(){
       }
       }
       //显示做过的题
-      if (that.data.choiceArray[that.data.count - 1]){
-      var j = that.data.count;
-      console.log(that.data.choiceArray[that.data.count - 1].choice)
-     that.setData({
-        current2: that.data.choiceArray[that.data.count - 1].choice,
-        flagchoices: true,
-        flag: that.data.choiceArray[that.data.count - 1].flag
-      })
-      }
+      this.reproblem();
       
       //判断是否为最后一题
       if (that.data.count==1){
@@ -260,8 +253,6 @@ collection:function(){
     } else if (start[0] > end[0] + 30) {
       
       console.log('左滑')//下一题
-    
-     
 
       if(that.data.count<that.data.order.length){
         wx.setStorageSync("counta", that.data.count + 1);
@@ -271,55 +262,49 @@ collection:function(){
             that.randomshowAnswer();
           }
         }
-      
+    
       }else{
         wx.showToast({
           title: '已是最后一题',
         })
    
       }
-
       //做过的题显示
-      this.reproblem()
+     this.reproblem()
+     
+      
 
 
     } else {
       console.log('静止')
     }
   },
-
-  //左滑做过的题显示
+ //做过的题显示
   reproblem:function(){
-    var f = false;
+    // var f = false;
     if (this.data.choiceArray.length > 0 && this.data.choiceArray!=null){
     for (var i = 0; i < this.data.choiceArray.length; i++) {
       if (this.data.choiceArray[i].pageNum == this.data.count) {
-        f = true;
+        // f = true;
+        this.setData({
+          flagchoices: true,
+        })
+        if (this.data.choiceArray.length > 0 && this.data.count < this.data.order.length + 1) {
+          this.setData({
+            current2: this.data.choiceArray[i].choice,
+            flag: this.data.choiceArray[i].flag
+          })
+        }
         break;
       } else {
-        f = false;
-      }
-      }
-    }
-    if (f) {
-      this.setData({
-       
-        flagchoices: true,
-       
-      })
-      if (this.data.choiceArray.length > 0 && this.data.count < this.data.order.length+1){
         this.setData({
-          current2: this.data.choiceArray[this.data.count - 1].choice,
-          flag: this.data.choiceArray[this.data.count - 1].flag
-        })
-      }
-    }else{
-
-      //选项可选
-      this.setData({
         current2: "",
         flagchoices: false,
+        flag:true
       })
+
+      }
+      }
     }
   },
  
